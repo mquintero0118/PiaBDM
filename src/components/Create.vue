@@ -69,6 +69,15 @@
               class="alert alert-danger d-flex align-items-center"
               role="alert"
             >
+              Favor de llenar la contraseña!
+            </div>
+          </transition>
+          <transition name="fade">
+            <div
+              v-if="passwordError2 === true"
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
               {{ msgError }}
             </div>
           </transition>
@@ -142,6 +151,7 @@ export default {
     const nameError = ref();
     const emailError = ref();
     const passwordError = ref();
+    const passwordError2 = ref();
     const selectError = ref();
     let msgError = ref("");
     let errorGlobal = false;
@@ -155,15 +165,29 @@ export default {
       }
       if (!passwordV.value.replace(/\s/g, "").length) {
         passwordError.value = true;
-        msgError.value = "Favor de ingresar la contraseña";
       }
-      const validation =
-        /^(?=.*\d)(?=.*[^a-zA-Z0-9])(?!.*\s).{8,30}$/;
+        //eslint-disable-next-line
+        const validationSC = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+        const validationChar = /(?=.*[A-Z])/;
+        const validationNumber = /(?=.*[0-9])/;
+        const validationLenght = /^.{8,35}$/;
       if (passwordError.value === false) {
-        if (!passwordV.value.match(validation)) {
-          passwordError.value = true;
-          msgError.value =
-            "La contraseña debe tener 8 caracteres, mayuscula, numero y caracter special";
+        msgError.value = "La contraseña debe tener:";
+        if (!passwordV.value.match(validationSC)) {
+          passwordError2.value = true;
+          msgError.value += " -un caracter especial"     
+        }
+        if (!passwordV.value.match(validationChar)) {
+          passwordError2.value = true;
+          msgError.value += " -una mayuscula"
+        }
+        if (!passwordV.value.match(validationNumber)) {
+          passwordError2.value = true;
+          msgError.value += " -un numero"
+        }
+        if (!passwordV.value.match(validationLenght)) {
+          passwordError2.value = true;
+          msgError.value += " -minimo 8 caracteres"
         }
       }
       if (!selectedV.value.text.replace(/\s/g, "").length) {
@@ -173,7 +197,8 @@ export default {
         nameError.value === true ||
         emailError.value === true ||
         passwordError.value === true ||
-        selectError.value === true
+        selectError.value === true ||
+        passwordError2.value === true
       ) {
         errorGlobal = true;
       } else {
@@ -201,6 +226,7 @@ export default {
       }
       if (id === "inputPassR") {
         passwordError.value = false;
+        passwordError2.value = false;
       }
       if (id === "selectedV") {
         selectError.value = false;
@@ -273,6 +299,7 @@ export default {
       nameError,
       emailError,
       passwordError,
+      passwordError2,
       errorGlobal,
       selectError,
       msgError,

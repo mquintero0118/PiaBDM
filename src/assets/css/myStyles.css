@@ -18,8 +18,17 @@
   margin-top: 5px;
   margin-left: 13%;
   width: 75%;
-  max-height: 45px;
+  max-height: 20px;
   margin-bottom: -5px;
+}
+.alert-warning {
+  margin-top: 5px;
+  margin-left: 13%;
+  width: 75%;
+  margin-bottom: -5px;
+  /*color: #8f2e2b;
+  background-color: #fcdbda;
+  border-color: #facac8;*/
 }
 .overlay.dark {
   background-color: rgba(0, 0, 0, 0.5);

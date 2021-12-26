@@ -50,6 +50,7 @@
               v-if="passwordError === true"
               class="alert alert-danger d-flex align-items-center"
               role="alert"
+              id="alertPass"
             >
               Favor de llenar la contraseña
             </div>
