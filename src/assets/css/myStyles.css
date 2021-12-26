@@ -1,0 +1,37 @@
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.field {
+  padding-bottom: 20px;
+}
+.form-select {
+  margin-left: 13%;
+  width: 75%;
+}
+.alert-danger {
+  margin-top: 5px;
+  margin-left: 13%;
+  width: 75%;
+  height: 20px;
+  margin-bottom: -5px;
+}
+.overlay.dark {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  z-index: 99999 !important;
+}
+.overlay {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 99999 !important;
+}
