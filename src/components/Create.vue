@@ -69,7 +69,7 @@
               class="alert alert-danger d-flex align-items-center"
               role="alert"
             >
-              Favor de llenar la contraseña
+              {{ msgError }}
             </div>
           </transition>
         </div>
@@ -103,7 +103,9 @@
       <div class="card-footer">
         <div class="container">
           <div class="d-flex justify-content-around">
-            <router-link to="/login" class="btn btn-primary">Ya tengo cuenta</router-link>
+            <router-link to="/login" class="btn btn-primary"
+              >Ya tengo cuenta</router-link
+            >
             <button type="button" class="btn btn-primary" @click="confirm">
               Crear cuenta
             </button>
@@ -141,6 +143,7 @@ export default {
     const emailError = ref();
     const passwordError = ref();
     const selectError = ref();
+    let msgError = ref("");
     let errorGlobal = false;
     /* Functions */
     function validateVariables() {
@@ -152,6 +155,16 @@ export default {
       }
       if (!passwordV.value.replace(/\s/g, "").length) {
         passwordError.value = true;
+        msgError.value = "Favor de ingresar la contraseña";
+      }
+      const validation =
+        /^(?=.*\d)(?=.*[^a-zA-Z0-9])(?!.*\s).{8,30}$/;
+      if (passwordError.value === false) {
+        if (!passwordV.value.match(validation)) {
+          passwordError.value = true;
+          msgError.value =
+            "La contraseña debe tener 8 caracteres, mayuscula, numero y caracter special";
+        }
       }
       if (!selectedV.value.text.replace(/\s/g, "").length) {
         selectError.value = true;
@@ -262,6 +275,7 @@ export default {
       passwordError,
       errorGlobal,
       selectError,
+      msgError,
       /* Functions */
       validateVariables,
       cleanVariables,
@@ -281,5 +295,5 @@ export default {
 
 <style>
 @import "../assets/css/theme.css";
-@import "../assets/css/myStyles.css"
+@import "../assets/css/myStyles.css";
 </style>
