@@ -49,7 +49,7 @@
               class="alert alert-danger d-flex align-items-center"
               role="alert"
             >
-              Favor de llenar el correo
+              {{ msgErrorEmail }}
             </div>
           </transition>
         </div>
@@ -154,6 +154,7 @@ export default {
     const passwordError2 = ref();
     const selectError = ref();
     let msgError = ref("");
+    let msgErrorEmail = ref("");
     let errorGlobal = false;
     /* Functions */
     function validateVariables() {
@@ -162,32 +163,41 @@ export default {
       }
       if (!emailV.value.replace(/\s/g, "").length) {
         emailError.value = true;
+        msgErrorEmail.value = "Favor de llenar el correo";
+      }
+      if (emailError.value === false) {
+        //eslint-disable-next-line
+        const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if (!emailV.value.match(validateEmail)) {
+          emailError.value = true;
+          msgErrorEmail.value = "Correo invalido";
+        }
       }
       if (!passwordV.value.replace(/\s/g, "").length) {
         passwordError.value = true;
       }
-        //eslint-disable-next-line
-        const validationSC = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-        const validationChar = /(?=.*[A-Z])/;
-        const validationNumber = /(?=.*[0-9])/;
-        const validationLenght = /^.{8,35}$/;
+      //eslint-disable-next-line
+      const validationSC = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+      const validationChar = /(?=.*[A-Z])/;
+      const validationNumber = /(?=.*[0-9])/;
+      const validationLenght = /^.{8,35}$/;
       if (passwordError.value === false) {
         msgError.value = "La contraseña debe tener:";
         if (!passwordV.value.match(validationSC)) {
           passwordError2.value = true;
-          msgError.value += " -un caracter especial"     
+          msgError.value += " -un caracter especial";
         }
         if (!passwordV.value.match(validationChar)) {
           passwordError2.value = true;
-          msgError.value += " -una mayuscula"
+          msgError.value += " -una mayuscula";
         }
         if (!passwordV.value.match(validationNumber)) {
           passwordError2.value = true;
-          msgError.value += " -un numero"
+          msgError.value += " -un numero";
         }
         if (!passwordV.value.match(validationLenght)) {
           passwordError2.value = true;
-          msgError.value += " -minimo 8 caracteres"
+          msgError.value += " -minimo 8 caracteres";
         }
       }
       if (!selectedV.value.text.replace(/\s/g, "").length) {
@@ -303,6 +313,7 @@ export default {
       errorGlobal,
       selectError,
       msgError,
+      msgErrorEmail,
       /* Functions */
       validateVariables,
       cleanVariables,
