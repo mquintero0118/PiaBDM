@@ -52,6 +52,15 @@
               {{ msgErrorEmail }}
             </div>
           </transition>
+          <transition name="fade">
+            <div
+              v-if="emailError2 === true"
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
+              {{ msgErrorEmail }}
+            </div>
+          </transition>
         </div>
         <div id="globalPasswordR" class="field">
           <label for="labelPassR">Contraseña</label>
@@ -150,6 +159,7 @@ export default {
     /* errors */
     const nameError = ref();
     const emailError = ref();
+    const emailError2 = ref();
     const passwordError = ref();
     const passwordError2 = ref();
     const selectError = ref();
@@ -169,7 +179,7 @@ export default {
         //eslint-disable-next-line
         const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if (!emailV.value.match(validateEmail)) {
-          emailError.value = true;
+          emailError2.value = true;
           msgErrorEmail.value = "Correo invalido";
         }
       }
@@ -233,6 +243,7 @@ export default {
       }
       if (id === "inpuntEmailR") {
         emailError.value = false;
+        emailError2.value = false;
       }
       if (id === "inputPassR") {
         passwordError.value = false;
@@ -308,6 +319,7 @@ export default {
       /* Errors */
       nameError,
       emailError,
+      emailError2,
       passwordError,
       passwordError2,
       errorGlobal,
