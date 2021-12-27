@@ -1,5 +1,4 @@
 <template>
-<!-- test -->
   <div class="d-flex justify-content-center">
     <div class="card text-center">
       <div class="card-header">Registro</div>
