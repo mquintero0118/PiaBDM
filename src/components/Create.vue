@@ -168,13 +168,16 @@ export default {
     let errorGlobal = false;
     /* Functions */
     function validateVariables() {
+      /* Whitespaces validation */
       if (!nameV.value.replace(/\s/g, "").length) {
         nameError.value = true;
       }
+      /* Whitespaces validation */
       if (!emailV.value.replace(/\s/g, "").length) {
         emailError.value = true;
         msgErrorEmail.value = "Favor de llenar el correo";
       }
+      /* Correcto email format validation */
       if (emailError.value === false) {
         //eslint-disable-next-line
         const validateEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -183,9 +186,11 @@ export default {
           msgErrorEmail.value = "Correo invalido";
         }
       }
+      /* Whitespaces validation */
       if (!passwordV.value.replace(/\s/g, "").length) {
         passwordError.value = true;
       }
+      /* Valitions for special character, number, caps and lenght */
       //eslint-disable-next-line
       const validationSC = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
       const validationChar = /(?=.*[A-Z])/;
@@ -210,6 +215,7 @@ export default {
           msgError.value += " -minimo 8 caracteres";
         }
       }
+      /* Whitespaces validation */
       if (!selectedV.value.text.replace(/\s/g, "").length) {
         selectError.value = true;
       }
