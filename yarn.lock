@@ -8616,7 +8616,7 @@
   "resolved" "https://registry.npmjs.org/vue-toastification/-/vue-toastification-2.0.0-rc.5.tgz"
   "version" "2.0.0-rc.5"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.5.18", "vue@^3.0.0", "vue@^3.0.2", "vue@>= 3.0.0 < 4", "vue@3.2.26":
+"vue@^2 || ^3.0.0-0", "vue@^2.5.18", "vue@^3.0.0", "vue@^3.0.2", "vue@^3.2.26", "vue@>= 3.0.0 < 4", "vue@3.2.26":
   "integrity" "sha512-KD4lULmskL5cCsEkfhERVRIOEDrfEL9CwAsLYpzptOGjaGFNWo3BQ9g8MAb7RaIO71rmVOziZ/uEN/rHwcUIhg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.26.tgz"
   "version" "3.2.26"
