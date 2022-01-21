@@ -91,32 +91,6 @@
             </div>
           </transition>
         </div>
-        <div id="globalRol" class="field">
-          <label for="labelRol">Rol</label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            v-model="selectedV"
-            @click="checkInput('selectedV')"
-          >
-            <option
-              v-for="product in products"
-              v-bind:value="{ id: product.id, text: product.name }"
-              v-bind:key="product"
-            >
-              {{ product.name }}
-            </option>
-          </select>
-          <transition name="fade">
-            <div
-              v-if="selectError === true"
-              class="alert alert-danger d-flex align-items-center"
-              role="alert"
-            >
-              Favor de seleccionar un rol
-            </div>
-          </transition>
-        </div>
       </div>
       <div class="card-footer">
         <div class="container">
@@ -146,23 +120,16 @@ export default {
     const loading = ref(false);
     /* Toast */
     const toast = useToast();
-    /* Select */
-    const products = [
-      { id: 1, name: "Estudiante" },
-      { id: 2, name: "Escuela" },
-    ];
     /* V-models */
     const nameV = ref("");
     const emailV = ref("");
     const passwordV = ref("");
-    const selectedV = ref({ id: "", text: "" });
     /* errors */
     const nameError = ref();
     const emailError = ref();
     const emailError2 = ref();
     const passwordError = ref();
     const passwordError2 = ref();
-    const selectError = ref();
     let msgError = ref("");
     let msgErrorEmail = ref("");
     let errorGlobal = false;
@@ -216,14 +183,10 @@ export default {
         }
       }
       /* Whitespaces validation */
-      if (!selectedV.value.text.replace(/\s/g, "").length) {
-        selectError.value = true;
-      }
       if (
         nameError.value === true ||
         emailError.value === true ||
         passwordError.value === true ||
-        selectError.value === true ||
         passwordError2.value === true
       ) {
         errorGlobal = true;
@@ -235,13 +198,11 @@ export default {
       nameV.value = "";
       emailV.value = "";
       passwordV.value = "";
-      selectedV.value = { id: "", text: "" };
     }
     function cleanAlerts() {
       nameError.value = false;
       emailError.value = false;
       passwordError.value = false;
-      selectError.value = false;
     }
     function checkInput(id) {
       if (id === "inputNameR") {
@@ -255,16 +216,12 @@ export default {
         passwordError.value = false;
         passwordError2.value = false;
       }
-      if (id === "selectedV") {
-        selectError.value = false;
-      }
     }
     async function sendData() {
       const data = {
         nombre: nameV.value,
         correo: emailV.value,
         password: passwordV.value,
-        rol: selectedV.value.text,
       };
       console.log(data);
     }
@@ -315,13 +272,10 @@ export default {
       loading,
       /* Totast */
       toast,
-      /* Select */
-      products,
       /* V-models */
       nameV,
       emailV,
       passwordV,
-      selectedV,
       /* Errors */
       nameError,
       emailError,
@@ -329,7 +283,6 @@ export default {
       passwordError,
       passwordError2,
       errorGlobal,
-      selectError,
       msgError,
       msgErrorEmail,
       /* Functions */
