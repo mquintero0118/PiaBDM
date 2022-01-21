@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <router-link to="/mainPage" class="navbar-brand">Archon Courses</router-link>
+    <router-link to="/mainPage" class="navbar-brand">Archon News</router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,9 +27,6 @@
         </li>
             
       </ul>
-      <div class="d-flex">
-          <router-link to="/about" class="nav-link">About</router-link>
-      </div>
     </div>
     
   </div>
