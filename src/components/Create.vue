@@ -112,6 +112,7 @@
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import axios from "axios";
 export default {
   setup() {
     /* Router */
@@ -133,6 +134,7 @@ export default {
     let msgError = ref("");
     let msgErrorEmail = ref("");
     let errorGlobal = false;
+    let errorDB = false;
     /* Functions */
     function validateVariables() {
       /* Whitespaces validation */
@@ -187,7 +189,8 @@ export default {
         nameError.value === true ||
         emailError.value === true ||
         passwordError.value === true ||
-        passwordError2.value === true
+        passwordError2.value === true ||
+        emailError2.value === true
       ) {
         errorGlobal = true;
       } else {
@@ -218,12 +221,34 @@ export default {
       }
     }
     async function sendData() {
-      const data = {
-        nombre: nameV.value,
-        correo: emailV.value,
-        password: passwordV.value,
-      };
-      console.log(data);
+      var data = new FormData();
+      data.append("name", nameV.value);
+      data.append("email", emailV.value);
+      data.append("pass", passwordV.value);
+      await axios
+        .post(
+          //http://localhost:8070/test.php?action=create
+          // http://localhost:8070/piaBDMBack/api.php?action=create
+          "http://localhost:8070/piaBDMBack/api.php?action=create",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error) {
+            console.log("Ocurrio un error!", res.data);
+            errorDB = true;
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((error) => {
+          console.log("Ocurrio un error en el servicio", error);
+          errorDB = 'url';
+        });
     }
     function toastAlertSucess() {
       toast.success("Usuario creado con exito!", {
@@ -231,8 +256,8 @@ export default {
         zindex: 2000,
       });
     }
-    function toastAlertError() {
-      toast.error("Porfavor llena todos los campos!", {
+    function toastAlertError(message) {
+      toast.error(message, {
         timeout: 1500,
         zindex: 2000,
       });
@@ -246,20 +271,32 @@ export default {
     async function send2Main() {
       setTimeout(() => {
         router.push({ path: "/mainPage" });
-      }, 1300);
+      }, 100);
     }
     /* EventsOnClick */
     const confirm = () => {
       validateVariables();
-      if (errorGlobal === true) {
-        toastAlertError();
-      } else {
+      if (errorGlobal === false) {
         sendData();
         loader();
-        toastAlertSucess();
-        cleanVariables();
-        cleanAlerts();
-        send2Main();
+        setTimeout(() => {
+        if (errorDB === false) {
+          toastAlertSucess();
+          send2Main();
+          cleanVariables();
+          cleanAlerts();
+        } else {
+          if(errorDB === true) {
+toastAlertError("El correo ya esta registrado");
+          } else {
+            toastAlertError("Error en la conexion");
+          }
+          
+          errorDB = false;
+        }
+        }, 500);
+      } else {
+          toastAlertError("Porfavor llena todos los campos");
       }
     };
     onMounted(() => {
@@ -285,6 +322,7 @@ export default {
       errorGlobal,
       msgError,
       msgErrorEmail,
+      errorDB,
       /* Functions */
       validateVariables,
       cleanVariables,
