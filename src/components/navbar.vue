@@ -21,11 +21,15 @@
             Mi perfil
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Ver perfil</a></li>
-            <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+             <li class="dropdown-item">
+          <router-link to="/editProfile" class="nav-link">Editar Perfil</router-link>
+        </li>
+        <li class="dropdown-item">
+        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</button>
+        </li>
           </ul>
         </li>
-            
+        
       </ul>
     </div>
     
@@ -53,5 +57,8 @@ name: 'Navbar',
 }
 .dropdown-item {
   text-align: center !important;
+}
+.btn-danger {
+  width: 100%;
 }
 </style>

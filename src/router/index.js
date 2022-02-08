@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Create from '../components/Create.vue'
 import Login from '../components/Login.vue'
 import MainPage from '../components/MainPage.vue'
+import EditProfile from '../components/EditProfile.vue'
 
 const routes = [
   {
@@ -32,6 +33,14 @@ const routes = [
     path: '/mainPage',
     name: 'MainPage',
     component: MainPage,
+    meta: {
+      title: 'MainPage',
+    },
+  },
+  {
+    path: '/editProfile',
+    name: 'EditProfile',
+    component: EditProfile,
     meta: {
       title: 'MainPage',
     },

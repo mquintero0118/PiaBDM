@@ -12,18 +12,18 @@
         <!-- Loader -->
         <h4 class="card-title">Vamos a crear tu cuenta!</h4>
         <div id="globalNameR" class="field">
-          <label for="labelNameR">Nombre </label>
+          <label for="labelNameR">Usuario </label>
           <input
             type="text"
             class="form-control"
-            id="inputNameR"
-            v-model="nameV"
-            @click="checkInput('inputNameR')"
+            id="inputUserR"
+            v-model="userV"
+            @click="checkInput('inputUserR')"
             @keydown.tab="checkInput('inpuntEmailR')"
           />
           <transition name="fade">
             <div
-              v-if="nameError === true"
+              v-if="userError === true"
               class="alert alert-danger d-flex align-items-center"
               role="alert"
             >
@@ -122,11 +122,11 @@ export default {
     /* Toast */
     const toast = useToast();
     /* V-models */
-    const nameV = ref("");
+    const userV = ref("");
     const emailV = ref("");
     const passwordV = ref("");
     /* errors */
-    const nameError = ref();
+    const userError = ref();
     const emailError = ref();
     const emailError2 = ref();
     const passwordError = ref();
@@ -138,8 +138,8 @@ export default {
     /* Functions */
     function validateVariables() {
       /* Whitespaces validation */
-      if (!nameV.value.replace(/\s/g, "").length) {
-        nameError.value = true;
+      if (!userV.value.replace(/\s/g, "").length) {
+        userError.value = true;
       }
       /* Whitespaces validation */
       if (!emailV.value.replace(/\s/g, "").length) {
@@ -186,7 +186,7 @@ export default {
       }
       /* Whitespaces validation */
       if (
-        nameError.value === true ||
+        userError.value === true ||
         emailError.value === true ||
         passwordError.value === true ||
         passwordError2.value === true ||
@@ -198,18 +198,18 @@ export default {
       }
     }
     function cleanVariables() {
-      nameV.value = "";
+      userV.value = "";
       emailV.value = "";
       passwordV.value = "";
     }
     function cleanAlerts() {
-      nameError.value = false;
+      userError.value = false;
       emailError.value = false;
       passwordError.value = false;
     }
     function checkInput(id) {
-      if (id === "inputNameR") {
-        nameError.value = false;
+      if (id === "inputUserR") {
+        userError.value = false;
       }
       if (id === "inpuntEmailR") {
         emailError.value = false;
@@ -222,7 +222,7 @@ export default {
     }
     async function sendData() {
       var data = new FormData();
-      data.append("name", nameV.value);
+      data.append("name", userV.value);
       data.append("email", emailV.value);
       data.append("pass", passwordV.value);
       await axios
@@ -300,7 +300,7 @@ toastAlertError("El correo ya esta registrado");
       }
     };
     onMounted(() => {
-      /* nameV.value = '';
+      /* userV.value = '';
       emailV.value = '';
       passwordV.value = ''; */
     });
@@ -310,11 +310,11 @@ toastAlertError("El correo ya esta registrado");
       /* Totast */
       toast,
       /* V-models */
-      nameV,
+      userV,
       emailV,
       passwordV,
       /* Errors */
-      nameError,
+      userError,
       emailError,
       emailError2,
       passwordError,
