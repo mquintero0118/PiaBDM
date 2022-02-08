@@ -25,7 +25,7 @@
             type="text"
             class="form-control disabled"
             disabled
-            value="Admin"
+            value="Editor"
           />
           </div>
           </div>
@@ -76,8 +76,8 @@
       <div class="card-footer">
         <div class="container">
           <div class="d-flex justify-content-around">
-             <button type="button" class="btn btn-danger btnE">
-              Resetear
+             <button type="button" class="btn btn-danger btnE" disabled>
+              Borrar Cuenta
             </button>
             <button type="button" class="btn btn-success btnE">
               Guardar cambios
@@ -102,7 +102,7 @@ export default {};
   color: grey;
 }
 .btnE {
-  max-width: 60%;
+  max-width: 30%;
   min-width: 30%;
   width: 30%;
 }
