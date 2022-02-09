@@ -134,7 +134,6 @@ export default {
     let msgError = ref("");
     let msgErrorEmail = ref("");
     let errorGlobal = false;
-    let errorDB = false;
     /* Functions */
     function validateVariables() {
       /* Whitespaces validation */
@@ -241,34 +240,29 @@ export default {
           if (res.data.error) {
             console.log("Ocurrio un error!", res.data);
             setTimeout(() => {
-              
               loader();
               toastAlertError("El correo ya esta registrado");
-            }, 1000) ;
-            
-            
+            }, 1000);
           } else {
             setTimeout(() => {
-            toastAlertSucess();
-            send2Main();
-            cleanVariables();
-            cleanAlerts();
-            loader();
-            }, 2000) ;
-            
+              toastAlertSucess("Usuario creado con exito!");
+              send2Main();
+              cleanVariables();
+              cleanAlerts();
+              loader();
+            }, 2000);
           }
         })
         .catch((error) => {
           console.log("Ocurrio un error en el servicio", error);
           setTimeout(() => {
-           toastAlertError("Error en la conexion");
-          loader();
-            }, 2000) ;
-          
+            toastAlertError("Error en la conexion");
+            loader();
+          }, 2000);
         });
     }
-    function toastAlertSucess() {
-      toast.success("Usuario creado con exito!", {
+    function toastAlertSucess(message) {
+      toast.success(message, {
         timeout: 1500,
         zindex: 2000,
       });
@@ -283,7 +277,7 @@ export default {
       loading.value = !loading.value;
     }
     async function send2Main() {
-        router.push({ path: "/mainPage" });
+      router.push({ path: "/mainPage" });
     }
     /* EventsOnClick */
     const confirm = () => {
@@ -318,7 +312,6 @@ export default {
       errorGlobal,
       msgError,
       msgErrorEmail,
-      errorDB,
       /* Functions */
       validateVariables,
       cleanVariables,
