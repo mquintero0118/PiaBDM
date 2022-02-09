@@ -240,14 +240,31 @@ export default {
         .then((res) => {
           if (res.data.error) {
             console.log("Ocurrio un error!", res.data);
-            errorDB = true;
+            setTimeout(() => {
+              
+              loader();
+              toastAlertError("El correo ya esta registrado");
+            }, 1000) ;
+            
+            
           } else {
-            console.log(res);
+            setTimeout(() => {
+            toastAlertSucess();
+            send2Main();
+            cleanVariables();
+            cleanAlerts();
+            loader();
+            }, 2000) ;
+            
           }
         })
         .catch((error) => {
           console.log("Ocurrio un error en el servicio", error);
-          errorDB = 'url';
+          setTimeout(() => {
+           toastAlertError("Error en la conexion");
+          loader();
+            }, 2000) ;
+          
         });
     }
     function toastAlertSucess() {
@@ -263,15 +280,10 @@ export default {
       });
     }
     function loader() {
-      loading.value = true;
-      setTimeout(() => {
-        loading.value = false;
-      }, 1400);
+      loading.value = !loading.value;
     }
     async function send2Main() {
-      setTimeout(() => {
         router.push({ path: "/mainPage" });
-      }, 100);
     }
     /* EventsOnClick */
     const confirm = () => {
@@ -279,24 +291,8 @@ export default {
       if (errorGlobal === false) {
         sendData();
         loader();
-        setTimeout(() => {
-        if (errorDB === false) {
-          toastAlertSucess();
-          send2Main();
-          cleanVariables();
-          cleanAlerts();
-        } else {
-          if(errorDB === true) {
-toastAlertError("El correo ya esta registrado");
-          } else {
-            toastAlertError("Error en la conexion");
-          }
-          
-          errorDB = false;
-        }
-        }, 500);
       } else {
-          toastAlertError("Porfavor llena todos los campos");
+        toastAlertError("Porfavor llena todos los campos");
       }
     };
     onMounted(() => {
