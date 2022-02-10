@@ -1,5 +1,6 @@
 <template>
-<ul class="nav fixed-bottom justify-content-center bg-light">
+<footer class="footer">
+        <ul class="nav bottom justify-content-center bg-light">
 <ul class="nav flex-column"> 
 
   <li class="title">
@@ -31,6 +32,7 @@
   
 </ul>
 </ul>
+    </footer>
 </template>
 
 <script>
@@ -40,6 +42,9 @@ export default {
 </script>
 
 <style>
+.footer{
+    margin-top: auto;
+}
 .title{
     font-size: 26px;
     color: grey;
