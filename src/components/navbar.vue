@@ -13,9 +13,6 @@
         <li class="nav-item">
           <router-link to="/login" class="nav-link">Login</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/about" class="nav-link">About</router-link>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Mi perfil
@@ -28,6 +25,9 @@
         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</button>
         </li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <router-link to="/createNews" class="nav-link">Crear Noticia</router-link>
         </li>
         
       </ul>
@@ -57,6 +57,9 @@ name: 'Navbar',
 }
 .dropdown-item {
   text-align: center !important;
+}
+.dropdown-menu {
+  z-index: 2000 !important;
 }
 .btn-danger {
   width: 100%;

@@ -3,6 +3,7 @@ import Create from '../components/Create.vue'
 import Login from '../components/Login.vue'
 import MainPage from '../components/MainPage.vue'
 import EditProfile from '../components/EditProfile.vue'
+import CreateNews from '../components/createNews.vue'  
 
 const routes = [
   {
@@ -42,7 +43,15 @@ const routes = [
     name: 'EditProfile',
     component: EditProfile,
     meta: {
-      title: 'MainPage',
+      title: 'Edit Profile',
+    },
+  },
+  {
+    path: '/createNews',
+    name: 'CreateNews',
+    component: CreateNews,
+    meta: {
+      title: 'Create News',
     },
   },
   {

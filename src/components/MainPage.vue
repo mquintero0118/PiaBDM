@@ -1,79 +1,130 @@
 <template>
-<ul class="justify-content-center">
- <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./testImages/bg_bggenerator_com.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+  <ul class="justify-content-center">
+    <div
+      id="carouselExampleCaptions"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
       </div>
+      <header
+        class="py-5 mb-5"
+        style="
+          background-color: #eee;
+          background-image: url(https://i.ibb.co/PmfmqxQ/image.png);
+          height: 280px;
+          background-repeat: no-repeat;
+          background-size: cover;
+        "
+      >
+        <div class="container h-100">
+          <div class="row h-100 align-items-center">
+            <div
+              class="col-lg-12"
+              style="background-color: rgba(255, 255, 255, 0.719)"
+            >
+              <h1
+                class="display-4 text-black mt-5 mb-2"
+                style="
+                  text-align: center;
+                  font-size: 60px;
+                  font-family: monospace;
+                "
+              >
+                Archon News
+              </h1>
+              <p class="lead mb-4 text-black-20" style="text-align: center">
+                El mejor portal de noticias
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
     </div>
-    <div class="carousel-item">
-      <img src="./testImages/bg_bggenerator_com.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <img src="./testImages/bg_bggenerator_com.png" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-  <ul class="nav flex-column">
-    
-  <li class="nav-item ">
-    
-  </li>
-  <li class="nav-item">
-    <div class="card" style="width: 18rem;">
-  <img src="./testImages/PP.jpg" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
-</ul>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <hr>
+        <h1 class="newNews">Nuevas noticias</h1>
+      </li>
+      <li class="nav-item">
+        <div class="d-flex justify-content-center">
+<div v-for="index in 3" :key="index" class="card cardMain" style="width: 18rem">
+          <img src="./testImages/PP.jpg" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">Club Penguin cerrara sus puertas</h5>
+            <p class="card-text">
+              Despues de una larga vida, Club Penguin cerrar sus puertas al publico...
+            </p>
+            <router-link to="/login" class="btn btn-primary">Ver noticia</router-link>
+          </div>
+        </div>
+        </div>
+        
+      </li>
+      <li class="nav-item">
+        <hr>
+        <h1>Noticias mas vistas</h1>
+      </li>
+      <li class="nav-item">
+        <div class="d-flex justify-content-center">
+<div v-for="index in 3" :key="index" class="card cardSecond" style="width: 10rem">
+          <img src="./testImages/newspaper.png" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">El mejor portal de noticias</h5>
+            <p class="card-text">
+              Archon News fue premiado como el mejor portal para noticias en el mundo...
+            </p>
+            <router-link to="/login" class="btn btn-primary">Ver noticia</router-link>
+          </div>
+        </div>
+        </div>
+        
+      </li>
+    </ul>
+  </ul>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
 .carousel {
   display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 70%;
+}
+.cardSecond {
+  margin-left: 15px;
+  margin-right: 15px;
+  min-width: 300px;
+}
+.cardMain {
+  margin-left: 35px;
+  margin-right: 35px;
+}
+.newNews {
+  font-size: 60px;
 }
 </style>
