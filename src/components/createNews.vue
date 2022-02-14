@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex">
-    <div class="card">
+    <div class="card cardStyle">
       <div class="card-header">Crear Noticia</div>
       <div class="card-body">
         <div class="container">
@@ -85,7 +85,7 @@ export default {};
   max-width: 170px;
   min-width: 15%;
 }
-.card {
+.cardStyle {
   width: 70% !important;
   max-width: 70% !important;
   margin-left: 16%;
