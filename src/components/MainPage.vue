@@ -68,6 +68,7 @@
       </li>
       <li class="nav-item">
         <div class="d-flex justify-content-center">
+          <div class="d-flex flex-wrap">
 <div v-for="index in 3" :key="index" class="card cardMain" style="width: 18rem">
           <img src="./testImages/PP.jpg" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -78,6 +79,8 @@
             <router-link to="/login" class="btn btn-primary">Ver noticia</router-link>
           </div>
         </div>
+          </div>
+
         </div>
         
       </li>
@@ -86,7 +89,9 @@
         <h1>Noticias mas vistas</h1>
       </li>
       <li class="nav-item">
-        <div class="d-flex justify-content-center">
+        
+<div class="d-flex justify-content-center">
+  <div class="d-flex flex-wrap">
 <div v-for="index in 3" :key="index" class="card cardSecond" style="width: 10rem">
           <img src="./testImages/newspaper.png" class="card-img-top" alt="..." />
           <div class="card-body">
@@ -98,6 +103,8 @@
           </div>
         </div>
         </div>
+        </div>
+        
         
       </li>
     </ul>
