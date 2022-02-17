@@ -125,11 +125,15 @@ export default {};
 .cardSecond {
   margin-left: 15px;
   margin-right: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   min-width: 300px;
 }
 .cardMain {
   margin-left: 35px;
   margin-right: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .newNews {
   font-size: 60px;
