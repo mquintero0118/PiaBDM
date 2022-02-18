@@ -25,6 +25,15 @@
                 <label for="place">Lugar de los hechos </label>
                 <input type="text" class="form-control" />
               </div>
+              <br />
+              <div>
+                <label for="dataNTime">Fecha y hora </label>
+              <Datepicker v-model="date" showNowButton>
+      <template #am-pm-button="{ toggle, value }">
+        <button @click="toggle">{{ value }}</button>
+      </template>
+    </Datepicker>
+              </div>
             </div>
             <div class="col">
               <div>
@@ -39,11 +48,9 @@
                   multiple
                 />
               </div>
-              <br>
+              <br />
               <div>
-                <label for="formFile" class="form-label"
-                  >Videos</label
-                >
+                <label for="formFile" class="form-label">Videos</label>
                 <input
                   class="form-control"
                   type="file"
@@ -53,7 +60,6 @@
                 />
               </div>
             </div>
-            
           </div>
         </div>
       </div>
@@ -77,7 +83,20 @@
 </template>
 
 <script>
-export default {};
+ import { ref } from 'vue';
+    import Datepicker from 'vue3-date-time-picker';
+    import 'vue3-date-time-picker/dist/main.css'
+
+export default {
+   components: { Datepicker },
+   setup() {
+            const date = ref();
+            
+            return {
+                date
+            }
+        }
+};
 </script>
 
 <style>
@@ -89,5 +108,13 @@ export default {};
   width: 70% !important;
   max-width: 70% !important;
   margin-left: 16%;
+}
+ .dp__input{
+  background-color: #F5F5F5;
+} 
+.dp__input_wrap{
+  background-color: #F5F5F5;
+  width: 75%;
+  margin-left: 13%;
 }
 </style>
