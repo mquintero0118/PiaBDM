@@ -28,11 +28,11 @@
               <br />
               <div>
                 <label for="dataNTime">Fecha y hora </label>
-              <Datepicker v-model="date" showNowButton>
-      <template #am-pm-button="{ toggle, value }">
-        <button @click="toggle">{{ value }}</button>
-      </template>
-    </Datepicker>
+                <Datepicker v-model="date" showNowButton>
+                  <template #am-pm-button="{ toggle, value }">
+                    <button @click="toggle">{{ value }}</button>
+                  </template>
+                </Datepicker>
               </div>
             </div>
             <div class="col">
@@ -59,6 +59,37 @@
                   multiple
                 />
               </div>
+              <div>
+                <br />
+                <label for="sections" class="form-label">Secciones</label>
+
+                <Multiselect
+                  v-model="value"
+                  mode="multiple"
+                  :close-on-select="false"
+                  :options="{
+                    section1: 'IT',
+                    section2: 'Marketing',
+                    section3: 'Desing',
+                  }"
+                />
+              </div>
+              <div>
+                <br />
+                <label for="keyWords" class="form-label">Palabras clave</label>
+                <Multiselect
+                  v-model="value"
+                  mode="tags"
+                  :close-on-select="false"
+                  :searchable="true"
+                  :create-option="true"
+                />
+              </div>
+              <br>
+               <div>
+                <label for="signature">Firma del reportero </label>
+                <input type="text" class="form-control" />
+              </div>
             </div>
           </div>
         </div>
@@ -83,23 +114,26 @@
 </template>
 
 <script>
- import { ref } from 'vue';
-    import Datepicker from 'vue3-date-time-picker';
-    import 'vue3-date-time-picker/dist/main.css'
+import { ref } from "vue";
+import Datepicker from "vue3-date-time-picker";
+import "vue3-date-time-picker/dist/main.css";
+import Multiselect from "@vueform/multiselect";
 
 export default {
-   components: { Datepicker },
-   setup() {
-            const date = ref();
-            
-            return {
-                date
-            }
-        }
+  components: { Datepicker, Multiselect },
+  setup() {
+    const date = ref();
+
+    return {
+      date,
+    };
+  },
 };
 </script>
 
 <style>
+@import "../assets/css/multiselect.scss";
+
 .btnE {
   max-width: 170px;
   min-width: 15%;
@@ -107,14 +141,16 @@ export default {
 .cardStyle {
   width: 70% !important;
   max-width: 70% !important;
-  margin-left: 16%;
+  margin-left: 15% !important;
 }
- .dp__input{
-  background-color: #F5F5F5;
-} 
-.dp__input_wrap{
-  background-color: #F5F5F5;
+.dp__input {
+  background-color: #f5f5f5;
+  border-radius: var(--ms-radius, 8px);
+}
+.dp__input_wrap {
+  background-color: #f5f5f5;
   width: 75%;
   margin-left: 13%;
+  border-radius: var(--ms-radius, 8px);
 }
 </style>
