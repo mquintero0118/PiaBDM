@@ -4,6 +4,7 @@ import Login from '../components/Login.vue'
 import MainPage from '../components/MainPage.vue'
 import EditProfile from '../components/EditProfile.vue'
 import CreateNews from '../components/createNews.vue'  
+import seeNews from '../components/seeNews.vue'
 
 const routes = [
   {
@@ -52,6 +53,14 @@ const routes = [
     component: CreateNews,
     meta: {
       title: 'Create News',
+    },
+  },
+  {
+    path: '/seeNews',
+    name: 'SeeNews',
+    component: seeNews,
+    meta: {
+      title: 'See News',
     },
   },
   {
