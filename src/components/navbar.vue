@@ -29,6 +29,9 @@
         <li class="nav-item">
           <router-link to="/createNews" class="nav-link">Crear Noticia</router-link>
         </li>
+        <li class="nav-item">
+          <router-link to="/searchNews" class="nav-link">Buscar Noticia</router-link>
+        </li>
         
       </ul>
     </div>
