@@ -76,7 +76,7 @@
             <p class="card-text">
               Despues de una larga vida, Club Penguin cerrar sus puertas al publico...
             </p>
-            <router-link to="/login" class="btn btn-primary">Ver noticia</router-link>
+            <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
           </div>
         </div>
           </div>
@@ -99,7 +99,7 @@
             <p class="card-text">
               Archon News fue premiado como el mejor portal para noticias en el mundo...
             </p>
-            <router-link to="/login" class="btn btn-primary">Ver noticia</router-link>
+            <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
           </div>
         </div>
         </div>
