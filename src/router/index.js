@@ -6,6 +6,7 @@ import EditProfile from '../components/EditProfile.vue'
 import CreateNews from '../components/createNews.vue'  
 import seeNews from '../components/seeNews.vue'
 import searchNews from '../components/searchNews.vue'
+import createSection from '../components/createSection.vue'
 
 const routes = [
   {
@@ -70,6 +71,14 @@ const routes = [
     component: searchNews,
     meta: {
       title: 'Search News',
+    },
+  },
+  {
+    path: '/createSection',
+    name: 'CreateSection',
+    component: createSection,
+    meta: {
+      title: 'Create Section',
     },
   },
   {
