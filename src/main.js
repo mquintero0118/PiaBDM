@@ -6,6 +6,8 @@ import 'vue-toastification/dist/index.css';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import Datepicker from 'vue3-date-time-picker';
+import 'vue3-date-time-picker/dist/main.css'
 library.add(faPhone);
 const options = {
     // You can set your default options here
@@ -13,6 +15,7 @@ const options = {
 
 createApp(App)
 .component("font-awesome-icon", FontAwesomeIcon)
+.component('Datepicker', Datepicker)
 .use(router)
 .use(Toast, options)
 .mount('#app')
