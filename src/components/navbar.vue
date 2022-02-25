@@ -22,7 +22,7 @@
           <router-link to="/editProfile" class="nav-link">Editar Perfil</router-link>
         </li>
         <li class="dropdown-item">
-          <router-link to="/createSection" class="nav-link">Crear Seccion</router-link>
+          <router-link to="/createSection" class="nav-link">Crear Sección</router-link>
         </li>
         <li class="dropdown-item">
         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-sign-out-alt"></i> Cerrar Sesion</button>
