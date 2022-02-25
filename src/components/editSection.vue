@@ -8,8 +8,8 @@
           <input
             type="text"
             class="form-control"
-            v-model="emailV"
             onkeypress="return event.charCode != 32"
+            value="Marketing"
           />
         </div>
         <div>
@@ -17,15 +17,9 @@
           <label for="sections" class="form-label">Color de la sección</label>
 
           <Multiselect
-            value="test"
-            mode="single"
-            :close-on-select="false"
-            :options="{
-              color1: 'Rojo',
-              color2: 'Azul',
-              color3: 'Amarillo',
-            }"
-          />
+  v-model="valor"
+  :options="['Rojo', 'Verde', 'Amarillo']"
+/>
         </div>
       </div>
       <div class="card-footer">
@@ -35,7 +29,7 @@
               Limpiar
             </button>
             <button type="button" class="btn btn-success success2" @click="confirm">
-              Crear sección
+              Actualizar
             </button>
           </div>
         </div>
@@ -49,7 +43,6 @@ import Multiselect from "@vueform/multiselect";
 
 export default {
   components: { Multiselect },
-  
 };
 </script>
 
