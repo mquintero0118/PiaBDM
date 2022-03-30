@@ -21,6 +21,10 @@
              <li class="dropdown-item">
           <router-link to="/editProfile" class="nav-link">Editar Perfil</router-link>
         </li>
+          <li class="dropdown-item">
+          <router-link to="/createReporter" class="nav-link">Registrar Reportero</router-link>
+        </li>
+
         <li class="dropdown-item">
           <router-link to="/createSection" class="nav-link">Crear sección</router-link>
         </li>

@@ -8,6 +8,7 @@ import seeNews from '../components/seeNews.vue'
 import searchNews from '../components/searchNews.vue'
 import createSection from '../components/createSection.vue'
 import editSection from '../components/editSection.vue'
+import createReporter from '../components/createReporter.vue'
 
 const routes = [
   {
@@ -82,6 +83,15 @@ const routes = [
       title: 'Create Section',
     },
   },
+
+  {
+    path: '/createReporter',
+    name: 'CreateReporter',
+    component: createReporter,
+    meta: {
+      title: 'Create Reporter',
+    },
+  },
   {
     path: '/editSection',
     name: 'EditSection',
@@ -89,6 +99,7 @@ const routes = [
     meta: {
       title: 'Edit Section',
     },
+    
   },
   {
     path: '/about',

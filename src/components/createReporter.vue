@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center">
     <div class="card text-center">
-      <div class="card-header">Registro</div>
+      <div class="card-header">Registro de Reporteros</div>
       <div class="card-body">
         <!-- Loader -->
         <div v-if="loading === true" class="overlay">
@@ -10,7 +10,7 @@
           </div>
         </div>
         <!-- Loader -->
-        <h4 class="card-title">Vamos a crear tu cuenta!</h4>
+        
 
         <div id="globalNameR" class="field">
           <label for="labelNameR">Nombre </label>
@@ -118,11 +118,9 @@
       <div class="card-footer">
         <div class="container">
           <div class="d-flex justify-content-around">
-            <router-link to="/login" class="btn btn-primary"
-              >Ya tengo cuenta</router-link
-            >
+           
             <button type="button" class="btn btn-primary" @click="confirm">
-              Crear cuenta
+              Crear Reportero
             </button>
           </div>
         </div>
