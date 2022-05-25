@@ -244,6 +244,7 @@ export default {
         passwordError2.value = false;
       }
     }
+    
     async function sendData() {
       var data = new FormData();
       data.append("name", userV.value);
@@ -259,7 +260,8 @@ for(var pair of data.entries()) {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/register_inc.php?action=create",
+         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
           data,
           {
             headers: {
@@ -276,7 +278,7 @@ for(var pair of data.entries()) {
             }, 1000);
           } else {
             setTimeout(() => {
-              //console.log(res.data.error);
+              console.log(res.data.error);
               toastAlertSucess("Usuario creado con exito!");
               console.log(res);
               send2Main();

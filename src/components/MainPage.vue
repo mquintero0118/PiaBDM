@@ -1,4 +1,7 @@
+
 <template>
+
+
   <ul class="justify-content-center">
     <div
       id="carouselExampleCaptions"
@@ -112,7 +115,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+}
+
+    
 </script>
 
 <style>

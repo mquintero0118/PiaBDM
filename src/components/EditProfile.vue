@@ -24,20 +24,23 @@
             <input
             type="text"
             class="form-control disabled"
+            v-model="userTypeV"
             disabled
-            value="Editor"
+            
+            
           />
           </div>
           </div>
           <div class="p-2 flex-grow-1 bd-highlight">
             <div>
               <br>
-            <label for="email">Correo Electronico </label>
+            <label for="email"> Correo Electronico </label>
             <input
             type="text"
             class="form-control"
+            v-model="emailV"
             id="inputEmailE"
-            value="alex@gmail.com"
+            
           />
           </div>
           <div>
@@ -46,8 +49,9 @@
             <input
             type="text"
             class="form-control"
+             v-model="nameV"
             id="inputNameE"
-            value="Manuel Alejandro"
+            
           />
           </div>
           <div>
@@ -56,8 +60,9 @@
             <input
             type="text"
             class="form-control"
+             v-model="lastNameV"
             id="inputLastnameE"
-            value="Quintero Gutierrez"
+            
           />
           </div>
           <div>
@@ -90,7 +95,40 @@
 </template>
 
 <script>
-export default {};
+import { ref } from "vue";
+export default{
+  
+setup() {
+
+const emailV = ref();
+const nameV = ref();
+const lastNameV = ref();
+const userTypeV = ref();
+
+
+var email = localStorage.getItem("email");
+var name = localStorage.getItem("name");
+var last_name = localStorage.getItem("last_name");
+var user_type = localStorage.getItem("user_type");
+
+emailV.value = email;
+nameV.value = name;
+lastNameV.value = last_name;
+userTypeV.value = user_type;
+
+console.log(user_type);
+
+
+return{
+emailV,
+nameV,
+lastNameV,
+email,
+userTypeV
+};
+
+}
+};
 </script>
 
 <style>

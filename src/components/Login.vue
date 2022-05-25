@@ -29,7 +29,7 @@
               class="alert alert-danger d-flex align-items-center"
               role="alert"
             >
-              Favor de llenar el nombre
+              Favor de llenar el correo
             </div>
           </transition>
         </div>
@@ -78,6 +78,7 @@
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
+import axios from "axios";
 export default {
   setup() {
     /* Router */
@@ -124,20 +125,68 @@ export default {
       }
     }
     async function sendData() {
-      const data = {
-        correo: emailV.value,
-        password: passwordV.value,
-      };
-      console.log(data);
+    
+
+    var data = new FormData();
+      data.append("email", emailV.value);
+      data.append("pass", passwordV.value);
+
+for(var pair of data.entries()) {
+   console.log(pair[0]+ ', '+ pair[1]); 
+}
+      await axios
+        .post(
+          "http://localhost/PIA_BDM/piaBDMBack/includes/login_inc.php?action=login",
+         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error == true) {
+            console.log("Ocurrio un error!", res.data);
+            setTimeout(() => {
+              loader();
+              toastAlertError("El correo ya esta registrado");
+            }, 1000);
+          } else {
+            setTimeout(() => {
+              console.log(res.data.error);
+              toastAlertSucess("Bienvenido!");
+              console.log(res);
+              localStorage.setItem("email", res.data.email);
+              localStorage.setItem("name", res.data.name);
+              localStorage.setItem("last_name", res.data.last_name);
+              localStorage.setItem("user_type", res.data.user_type);
+          
+              send2Main();
+              //cleanVariables();
+              cleanAlerts();
+              loader();
+            }, 2000);
+          }
+        })
+        .catch((error) => {
+          console.log("Ocurrio un error en el servicio", error);
+          setTimeout(() => {
+            toastAlertError("Error en la conexion");
+            loader();
+          }, 2000);
+        });
+
+
     }
-    function toastAlertSucess() {
-      toast.success("Bienvenido de vuelta!", {
+    function toastAlertSucess(message) {
+      toast.success(message, {
         timeout: 1500,
         zindex: 2000,
       });
     }
-    function toastAlertError() {
-      toast.error("Porfavor llena todos los campos!", {
+    function toastAlertError(message) {
+      toast.error(message, {
         timeout: 1500,
         zindex: 2000,
       });
@@ -154,17 +203,13 @@ export default {
       }, 1300);
     }
     /* EventsOnClick */
-    const confirm = () => {
+     const confirm = () => {
       validateVariables();
-      if (errorGlobal === true) {
-        toastAlertError();
-      } else {
+      if (errorGlobal === false) {
         sendData();
         loader();
-        toastAlertSucess();
-        cleanVariables();
-        cleanAlerts();
-        send2Main();
+      } else {
+        toastAlertError("Porfavor llena todos los campos");
       }
     };
     return {
