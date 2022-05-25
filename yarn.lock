@@ -1498,7 +1498,7 @@
   optionalDependencies:
     "prettier" "^1.18.2 || ^2.0.0"
 
-"@vue/devtools-api@^6.0.0-beta.18":
+"@vue/devtools-api@^6.0.0-beta.11", "@vue/devtools-api@^6.0.0-beta.18":
   "integrity" "sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q=="
   "resolved" "https://registry.npmjs.org/@vue/devtools-api/-/devtools-api-6.0.0-beta.20.1.tgz"
   "version" "6.0.0-beta.20.1"
@@ -1565,6 +1565,13 @@
   "integrity" "sha512-1M/le6UwTemTHRWF8aqHU3wRVwlyWNLqh8BWDmx80ygbS80P52lhfexGNh80C2P6H8AsrIoCfvdEJtfqQ/UHCg=="
   "resolved" "https://registry.npmjs.org/@vueform/multiselect/-/multiselect-2.3.2.tgz"
   "version" "2.3.2"
+
+"@vuepic/vue-datepicker@^3.2.1":
+  "integrity" "sha512-+YP+Kvc9ZpMELftN4B243/ajgaIb6JVIR5CRoxZGIZX0cFe2tNhLYc8Cl40m12CHGlz44wbmQJGJuW9xtP05XA=="
+  "resolved" "https://registry.npmjs.org/@vuepic/vue-datepicker/-/vue-datepicker-3.2.1.tgz"
+  "version" "3.2.1"
+  dependencies:
+    "date-fns" "^2.28.0"
 
 "@webassemblyjs/ast@1.9.0":
   "integrity" "sha512-C6wW5L+b7ogSDVqymbkkvuW9kruN//YisMED04xzeBBqjHa2FYnmvOlS6Xj68xWQRgWvI9cIglsjFowH/RJyEA=="
@@ -8650,6 +8657,13 @@
   "version" "2.7.0"
   dependencies:
     "date-fns" "^2.28.0"
+
+"vuex@^4.0.2":
+  "integrity" "sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q=="
+  "resolved" "https://registry.npmjs.org/vuex/-/vuex-4.0.2.tgz"
+  "version" "4.0.2"
+  dependencies:
+    "@vue/devtools-api" "^6.0.0-beta.11"
 
 "watchpack-chokidar2@^2.0.1":
   "integrity" "sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww=="

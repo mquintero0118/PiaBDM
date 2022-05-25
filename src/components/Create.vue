@@ -132,12 +132,14 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import axios from "axios";
 export default {
   setup() {
+     const store = useStore();
     /* Router */
     const router = useRouter();
     /* Loader */
@@ -260,7 +262,7 @@ for(var pair of data.entries()) {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost/PIA_BDM/piaBDMBack/includes/register_inc.php?action=create",
+          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/register_inc.php?action=create",
          //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
           data,
           {
@@ -278,7 +280,6 @@ for(var pair of data.entries()) {
             }, 1000);
           } else {
             setTimeout(() => {
-              console.log(res.data.error);
               toastAlertSucess("Usuario creado con exito!");
               console.log(res);
               send2Main();
@@ -312,7 +313,7 @@ for(var pair of data.entries()) {
       loading.value = !loading.value;
     }
     async function send2Main() {
-      router.push({ path: "/mainPage" });
+      router.push({ path: "/Login" });
     }
     /* EventsOnClick */
     const confirm = () => {
@@ -360,6 +361,7 @@ for(var pair of data.entries()) {
       send2Main,
       /* EventsOnClick */
       confirm,
+      store,
     };
   },
 };

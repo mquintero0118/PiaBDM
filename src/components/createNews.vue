@@ -8,34 +8,49 @@
             <div class="col">
               <div>
                 <label for="title">Titulo de la noticia </label>
-                <input type="text" id="newsTitle" class="form-control" v-model="vTitle"/>
+                <input
+                  type="text"
+                  id="newsTitle"
+                  class="form-control"
+                  v-model="title"
+                />
               </div>
               <br />
               <div>
                 <label for="desc">Descripción de la noticia </label>
-                <textarea type="text" id="newsLead" class="form-control" v-model="vLead"/>
+                <textarea
+                  type="text"
+                  id="newsLead"
+                  class="form-control"
+                  v-model="desc"
+                />
               </div>
               <br />
               <div>
                 <label for="text">Texto de la noticia </label>
-                <textarea type="text"  id="newsText" class="form-control"  v-model="vText" />
+                <textarea
+                  type="text"
+                  id="newsText"
+                  class="form-control"
+                />
               </div>
               <br />
               <div>
                 <label for="place">Lugar de los hechos </label>
-                <input type="text" id="newsPlace" class="form-control"  v-model="vPlace" />
+                <input
+                  type="text"
+                  id="newsPlace"
+                  class="form-control"
+                />
               </div>
               <br />
               <div>
-                <label for="dataNTime">Fecha y hora </label>   
-                <Datepicker   v-model="date"  showNowButton ref="datepicker">
+                <label for="dataNTime">Fecha y hora </label>
+                <Datepicker showNowButton ref="datepicker">
                   <template #am-pm-button="{ toggle, value }">
                     <button @click="toggle">{{ value }}</button>
                   </template>
                 </Datepicker>
-       
-
-
               </div>
             </div>
             <div class="col">
@@ -49,7 +64,6 @@
                   accept="image/png, image/gif, image/jpeg"
                   id="formFileMultipleImg"
                   multiple
-                  
                 />
               </div>
               <br />
@@ -68,30 +82,25 @@
                 <label for="sections" class="form-label">Secciones</label>
 
                 <Multiselect
-                  v-model="valueSecciones"
-                  
                   mode="tags"
                   :close-on-select="true"
-                 
-                  :options= optionsSections
-                   label="value"
-                  track-by="section">
+                  label="value"
+                  track-by="section"
+                >
                 </Multiselect>
-               
               </div>
               <div>
                 <br />
                 <label for="keyWords" class="form-label">Palabras clave</label>
                 <Multiselect
-                  v-model="valueTags"
                   mode="tags"
                   :close-on-select="false"
                   :searchable="true"
                   :create-option="true"
                 />
               </div>
-              <br>
-               <div>
+              <br />
+              <div>
                 <label for="signature">Firma del reportero </label>
                 <input type="text" id="newsSignature" class="form-control" />
               </div>
@@ -102,7 +111,7 @@
       <div class="card-footer">
         <div class="container">
           <div class="d-flex justify-content-around">
-            <button type="button" class="btn btn-primary btnE" >
+            <button type="button" class="btn btn-primary btnE">
               En Redaccion
             </button>
             <button type="button" class="btn btn-primary btnE" @click="confirm">
@@ -119,209 +128,32 @@
 </template>
 
 <script>
-
 import { ref } from "vue";
 import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
-import axios from "axios";
-
+// import axios from "axios";
 
 export default {
   components: { Datepicker, Multiselect },
-  
-
 
   setup() {
-    const date = ref(new Date());
-    let dataSeccion = ref();
-   const valueSecciones = ref();
-    const valueTags = ref();
-    
-  var optionsSections = [];
-
-var dataSecciones;
-
- var options = {
-        year: "numeric",
-        month: "2-digit",
-        day: "numeric"
-    };
-
-    //const loading = ref(false);
-
-
-
-  
-
-  async function getSections(){
-    axios.get(
-          //http://localhost:8070/test.php?action=create
-          // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
-         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
-          null,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.error == true) {
-             console.log("Ocurrio un error!", res.data);
-            // setTimeout(() => {
-            //   loader();
-            //   toastAlertError("El correo ya esta registrado");
-            // }, 1000);
-          } else {
-            // setTimeout(() => {
-            //   console.log(res.data.error);
-            //  // toastAlertSucess("Usuario creado con exito!");
-              console.log(res.data[0][0]["DESCRIPTION"]);
-              dataSeccion.value = res.data[0];
-              optionsSections.push (res.data[0][0]["DESCRIPTION"]);
-              console.log(dataSeccion.value);
-              console.log(optionsSections[0]);
-            
-              
-            return res.data;
-            
-              //console.log(section);
-              
-            //   send2Main();
-            //   cleanVariables();
-            //   cleanAlerts();
-            //   loader();
-            // }, 2000);
-          }
-        })
-        .catch((error) => {
-          console.log("Ocurrio un error en el servicio", error);
-          // setTimeout(() => {
-          //  toastAlertError("Error en la conexion");
-          //   loader();
-          // }, 2000);
-        });
-  }
-
-  getSections();
-
-async function axiosTest() {
-    const response = await axios.get("http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections");
-    return response.data
-}
-
-axiosTest()
-    .then(data => {
-        dataSecciones = data;
-        console.log(dataSecciones);
-    })
-    .catch(err => console.log(err))
-
-
-async function sendData() { 
-    var data = new FormData();
-  data.append("title", document.getElementById("newsTitle").value);
-  data.append("lead", document.getElementById("newsLead").value);
-  data.append("text", document.getElementById("newsText").value);
-  data.append("place", document.getElementById("newsPlace").value);
-  data.append("signature", document.getElementById("newsSignature").value);
-  data.append("video", document.getElementById("formFileMultipleVid").value);
-  data.append("img", document.getElementById("formFileMultipleImg").value);
-  data.append("seccion", valueSecciones.value);
-  data.append("tag", valueTags.value);
-
-var datelocal = date.value.toLocaleDateString("en",options);
-var dateSQL = datelocal.substring(6) + "-" + datelocal.substring(0,2) + "-" + datelocal.substring(3,5);
-
-  data.append("dateTime", dateSQL+' '+date.value.toTimeString().split(' ')[0]);
-  //console.log( date.value.toJSON().slice(0, 19).replace('T', ' '));
-  
-//       data.append("lastName", lastNameV.value)
-//       data.append("email", emailV.value);
-//       data.append("pass", passwordV.value);
-     
-for(var pair of data.entries()) {
-    console.log(pair[0]+ ', '+ pair[1]); 
-}
-
-      await axios
-        .post(
-          //http://localhost:8070/test.php?action=create
-          // http://localhost:8070/piaBDMBack/api.php?action=create
-          //"http://localhost/PIA_BDM/piaBDMBack/includes/register_inc.php?action=create",
-         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
-          data,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((res) => {
-          if (res.data.error == true) {
-             console.log("Ocurrio un error!", res.data);
-            // setTimeout(() => {
-            //   loader();
-            //   toastAlertError("El correo ya esta registrado");
-            // }, 1000);
-          } else {
-            // setTimeout(() => {
-            //   console.log(res.data.error);
-            //  // toastAlertSucess("Usuario creado con exito!");
-              console.log(res);
-            //   send2Main();
-            //   cleanVariables();
-            //   cleanAlerts();
-            //   loader();
-            // }, 2000);
-          }
-        })
-        .catch((error) => {
-          console.log("Ocurrio un error en el servicio", error);
-          // setTimeout(() => {
-          //  toastAlertError("Error en la conexion");
-          //   loader();
-          // }, 2000);
-        });
+    /* v-models */
+    const title = ref('');
+    // const desc = ref('');
+    /* Functions */
+    function confirm() {
+      console.log(title.value)
     }
 
-  
-     const confirm = () => {
-      sendData();
-      console.log("el valor es "  + dataSeccion.value[0]["DESCRIPTION"]);
-     
-    };
-
-  
-
-
-  function printSecciones(){
-    console.log("print");
-    
-    console.log(dataSecciones);
-  }
-
-
-  printSecciones();
-  
     return {
-      
-      dataSeccion,
-      optionsSections,
-      date,
-      valueSecciones,
-      valueTags,
+      /* v-models */
+      title,
+      /* Functions */
       confirm,
-      
-      
-     // loading,
     };
   },
-  
 };
-
 </script>
 
 <style>

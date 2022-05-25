@@ -10,6 +10,7 @@ import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import Datepicker from 'vue3-date-time-picker';
 import 'vue3-date-time-picker/dist/main.css'
+import store from './store/index'
 
 //createApp.use(VueSession);
 library.add(faPhone);
@@ -18,6 +19,7 @@ const options = {
 };
 
 createApp(App)
+.use(store)
 .component("font-awesome-icon", FontAwesomeIcon)
 .component('Datepicker', Datepicker)
 .use(router)

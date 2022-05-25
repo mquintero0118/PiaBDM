@@ -75,12 +75,14 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useRouter } from "vue-router";
 import axios from "axios";
 export default {
   setup() {
+    const store = useStore();
     /* Router */
     const router = useRouter();
     /* Loader */
@@ -136,7 +138,7 @@ for(var pair of data.entries()) {
 }
       await axios
         .post(
-          "http://localhost/PIA_BDM/piaBDMBack/includes/login_inc.php?action=login",
+          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/login_inc.php?action=login",
          //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
           data,
           {
@@ -154,14 +156,13 @@ for(var pair of data.entries()) {
             }, 1000);
           } else {
             setTimeout(() => {
-              console.log(res.data.error);
-              toastAlertSucess("Bienvenido!");
               console.log(res);
-              localStorage.setItem("email", res.data.email);
-              localStorage.setItem("name", res.data.name);
-              localStorage.setItem("last_name", res.data.last_name);
-              localStorage.setItem("user_type", res.data.user_type);
-          
+              store.state.name = res.data.name;
+              store.state.email = res.data.email;
+              store.state.last_name = res.data.last_name;
+              store.state.user_id = res.data.user_id;
+              store.state.user_type = res.data.user_type;
+              console.log(store.state)
               send2Main();
               //cleanVariables();
               cleanAlerts();
@@ -236,6 +237,7 @@ for(var pair of data.entries()) {
       send2Main,
       /* EventsOnClick */
       confirm,
+      store,
     };
   },
 };
