@@ -84,8 +84,10 @@
                 <Multiselect
                   mode="tags"
                   :close-on-select="true"
-                  label="value"
+                  label="name"
                   track-by="section"
+                  v-model="section"
+                  :options="sections"
                 >
                 </Multiselect>
               </div>
@@ -128,7 +130,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
@@ -140,17 +142,39 @@ export default {
   setup() {
     /* v-models */
     const title = ref('');
+    const section = ref();
+    const sections = ref([{
+      value: 1,
+      name: 'Amarillo',
+      posicion: 1,
+    },{
+value: 2,
+      name: 'Rojo',
+      posicion: 2,
+    },{
+      value: 3,
+      name: 'Verde',
+      posicion: 3,
+    }]);
     // const desc = ref('');
     /* Functions */
     function confirm() {
       console.log(title.value)
+      console.log(section.value)
     }
-
+    onMounted(()=>{
+      /* Aqui haces la peticion con axios */
+      /* response lo iguales a una constante
+      tipo asi sections = res.data.data*/
+      /* es necesario que tenga una estructura como la de arriba*/
+    })
     return {
       /* v-models */
       title,
       /* Functions */
       confirm,
+      sections,
+      section,
     };
   },
 };
