@@ -79,7 +79,8 @@
                   type="file"
                   accept="video/mp4"
                   id="formFileMultipleVid"
-                  multiple
+                  ref="video"
+                  v-on:change="handleVideoUpload()"
                 />
               </div>
               <div>
@@ -156,6 +157,7 @@ export default {
       day: "numeric",
     };
     const file = ref(null)
+    const video = ref(null)
     const title = ref("");
     const section = ref();
     var sections = ref([]);
@@ -173,6 +175,9 @@ export default {
            // debugger;
             console.log("selected file",file.value.files)
             //Upload to server
+        }
+        const handleVideoUpload = async() => {
+          console.log("selected file",video.value.files)
         }
 
     async function sendData() {
@@ -221,7 +226,7 @@ export default {
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
          // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
-          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=create",
+          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
           data,
           {
             headers: {
@@ -259,7 +264,7 @@ export default {
       axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
+          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
           null,
           {
             headers: {
@@ -307,6 +312,8 @@ export default {
       file,
       store,
       image_path,
+      video,
+      handleVideoUpload,
     };
   },
 };
