@@ -170,6 +170,12 @@
         </div>
       </div>
     </div>
+  
+    <video width="600" height="400" controls  >
+      <source v-bind:src="video_path" >
+
+    </video>
+    
   </div>
   <br />
   <br />
@@ -209,6 +215,8 @@ export default {
     var image_path = ref(
       "https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg"
     );
+  var showVideo = false;
+    var video_path = ref("");
 
     const desc = ref("");
     const texto = ref("");
@@ -248,12 +256,14 @@ export default {
           });
         }
       } else if (value === 1) {
+
         toast.success("Noticia en redaccion!", {
           timeout: 1500,
           zindex: 2000,
         });
         sendData(value);
-        
+              showVideo = true;
+
       }
       
     }
@@ -278,10 +288,10 @@ export default {
       data.append("state", document.getElementById("newsState").value);
       data.append("city", document.getElementById("newsCity").value);
       data.append("signature", document.getElementById("newsSignature").value);
-      data.append(
-        "video",
-        document.getElementById("formFileMultipleVid").value
-      );
+      // data.append(
+      //   "video",
+      //   document.getElementById("formFileMultipleVid").value
+      // );
       data.append("img", document.getElementById("formFileMultipleImg").value);
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
@@ -316,7 +326,7 @@ export default {
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
           // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
-          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=create",
           data,
           {
             headers: {
@@ -333,8 +343,11 @@ export default {
             //   }, 1000);
           } else {
             image_path.value = res.data.imagenSrc;
+            video_path.value = res.data.videoSrc;
+            console.log(video_path);
+            console.log(image_path);
             setTimeout(() => {
-        router.push({ path: "/mainPage" });
+        //router.push({ path: "/mainPage" });
       }, 1300);
           }
         })
@@ -355,7 +368,7 @@ export default {
       axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
           null,
           {
             headers: {
@@ -403,6 +416,7 @@ export default {
       file,
       store,
       image_path,
+      video_path,
       video,
       handleVideoUpload,
       toast,
@@ -415,6 +429,7 @@ export default {
       videoV,
       firma,
       router,
+      showVideo,
     };
   },
 };
