@@ -46,8 +46,8 @@
               <br />
               <div>
                 <label for="dataNTime">Fecha y hora </label>
-                <Datepicker showNowButton ref="datepicker">
-                  <template #am-pm-button="{ toggle, value }">
+                <Datepicker v-model="date" showNowButton ref="datepicker">
+                  <template  #am-pm-button="{ toggle, value }">
                     <button @click="toggle">{{ value }}</button>
                   </template>
                 </Datepicker>
@@ -96,6 +96,7 @@
                 <label for="keyWords" class="form-label">Palabras clave</label>
                 <Multiselect
                   mode="tags"
+                  v-model="valueTags"
                   :close-on-select="false"
                   :searchable="true"
                   :create-option="true"
@@ -134,39 +135,147 @@ import { onMounted, ref } from "vue";
 import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
-// import axios from "axios";
+ import axios from "axios";
 
 export default {
   components: { Datepicker, Multiselect },
 
   setup() {
     /* v-models */
+    
+    var options = {
+        year: "numeric",
+        month: "2-digit",
+        day: "numeric"
+    };
     const title = ref('');
     const section = ref();
-    const sections = ref([{
-      value: 1,
-      name: 'Amarillo',
-      posicion: 1,
-    },{
-value: 2,
-      name: 'Rojo',
-      posicion: 2,
-    },{
-      value: 3,
-      name: 'Verde',
-      posicion: 3,
-    }]);
+    var sections = ref([]);
+    const valueTags = ref();
+    const date = ref(new Date());
+
     // const desc = ref('');
     /* Functions */
     function confirm() {
-      console.log(title.value)
-      console.log(section.value)
+      sendData();
+      
     }
+
+
+    async function sendData(){
+          var data = new FormData();
+  data.append("title", document.getElementById("newsTitle").value);
+  data.append("lead", document.getElementById("newsLead").value);
+  data.append("text", document.getElementById("newsText").value);
+  data.append("place", document.getElementById("newsPlace").value);
+  data.append("signature", document.getElementById("newsSignature").value);
+  data.append("video", document.getElementById("formFileMultipleVid").value);
+  data.append("img", document.getElementById("formFileMultipleImg").value);
+  data.append("seccion", section.value);
+  data.append("tag", valueTags.value);
+
+var datelocal = date.value.toLocaleDateString("en",options);
+var dateSQL = datelocal.substring(6) + "-" + datelocal.substring(0,2) + "-" + datelocal.substring(3,5);
+
+  data.append("dateTime", dateSQL+' '+date.value.toTimeString().split(' ')[0]);
+  //console.log( date.value.toJSON().slice(0, 19).replace('T', ' '));
+  
+//       data.append("lastName", lastNameV.value)
+//       data.append("email", emailV.value);
+//       data.append("pass", passwordV.value);
+     
+for(var pair of data.entries()) {
+    console.log(pair[0]+ ', '+ pair[1]); 
+}
+
+await axios
+        .post(
+          //http://localhost:8070/test.php?action=create
+          // http://localhost:8070/piaBDMBack/api.php?action=create
+          "http://localhost/pia_BDM/piaBDMBack/includes/news_inc.php?action=create",
+         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error == true) {
+            console.log("Ocurrio un error!", res.data);
+          //  setTimeout(() => {
+            
+         //   }, 1000);
+          } else {
+           // setTimeout(() => {
+            
+             
+         //   }, 2000);
+          }
+        })
+        .catch((error) => {
+          console.log("Ocurrio un error en el servicio", error);
+       //   setTimeout(() => {
+          
+          
+        //  }, 2000);
+        });
+    }
+
+
+
+  
+
+
     onMounted(()=>{
       /* Aqui haces la peticion con axios */
       /* response lo iguales a una constante
       tipo asi sections = res.data.data*/
       /* es necesario que tenga una estructura como la de arriba*/
+
+        axios
+        .get(
+          "http://localhost/pia_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
+         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          null,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error == true) {
+            console.log("Ocurrio un error!", res.data);
+          //  setTimeout(() => {
+          
+
+
+        //    }, 1000);
+          } else {
+        //    setTimeout(() => {
+              console.log(res.data[0]);
+
+              res.data[0].forEach(element => {
+               sections.value.push(element["DESCRIPTION"]);
+               console.log(element);
+              });
+
+           //  sections.value = [res.data[0][0].DESCRIPTION, res.data[0][1].DESCRIPTION, res.data[0][2].DESCRIPTION];             
+            console.log(sections);
+        //    }, 2000);
+          }
+        })
+        .catch((error) => {
+          console.log("Ocurrio un error en el servicio", error);
+       //   setTimeout(() => {
+          
+        //  }, 2000);
+        });
+
+
+
     })
     return {
       /* v-models */
@@ -175,6 +284,8 @@ value: 2,
       confirm,
       sections,
       section,
+      date,
+      valueTags,
     };
   },
 };
