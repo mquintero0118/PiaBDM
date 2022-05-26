@@ -141,6 +141,7 @@ import Datepicker from "vue3-date-time-picker";
 import "vue3-date-time-picker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
+import { useStore } from "vuex";
 
 export default {
   components: { Datepicker, Multiselect },
@@ -159,6 +160,7 @@ export default {
     var sections = ref([]);
     const valueTags = ref();
     const date = ref(new Date());
+    const store = useStore();
 
     // const desc = ref('');
     /* Functions */
@@ -188,6 +190,7 @@ export default {
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
       data.append("image", file.value.files);
+      data.append("userId", store.state.user_id)
 
       var datelocal = date.value.toLocaleDateString("en", options);
       var dateSQL =
@@ -298,6 +301,7 @@ export default {
       valueTags,
       handleFileUpload,
       file,
+      store,
     };
   },
 };
