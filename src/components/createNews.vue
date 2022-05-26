@@ -125,6 +125,7 @@
             <button type="button" class="btn btn-primary btnE" @click="confirm">
               Terminar Noticia
             </button>
+            <img v-bind:src="image_path"  alt="Girl in a jacket" width="500" height="600">
           </div>
         </div>
       </div>
@@ -161,6 +162,7 @@ export default {
     const valueTags = ref();
     const date = ref(new Date());
     const store = useStore();
+    var image_path = ref("https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg");
 
     // const desc = ref('');
     /* Functions */
@@ -189,7 +191,7 @@ export default {
       data.append("img", document.getElementById("formFileMultipleImg").value);
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
-      data.append("image", file.value.files);
+      data.append("image", file.value.files[0]);
       data.append("userId", store.state.user_id)
 
       var datelocal = date.value.toLocaleDateString("en", options);
@@ -218,12 +220,13 @@ export default {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
-          //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+         // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=create",
           data,
           {
             headers: {
               "Content-Type": "application/json",
+             // "Content-Type": "multipart/form-data",
             },
           }
         )
@@ -234,6 +237,7 @@ export default {
 
             //   }, 1000);
           } else {
+            image_path.value = res.data.imagenSrc;
             // setTimeout(() => {
             //   }, 2000);
           }
@@ -254,8 +258,8 @@ export default {
 
       axios
         .get(
-          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
           null,
           {
             headers: {
@@ -302,6 +306,7 @@ export default {
       handleFileUpload,
       file,
       store,
+      image_path,
     };
   },
 };
