@@ -197,6 +197,7 @@ export default {
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
       data.append("image", file.value.files[0]);
+      data.append("video",video.value.files[0]);
       data.append("userId", store.state.user_id)
 
       var datelocal = date.value.toLocaleDateString("en", options);
