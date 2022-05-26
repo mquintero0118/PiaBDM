@@ -8,16 +8,6 @@
             <div>
             <img src="./testImages/PP.jpg" class="img-thumbnail" alt="..." />
             </div>
-            <div>
-              <br>
-            <label for="userE">Usuario </label>
-            <input
-            type="text"
-            class="form-control"
-            id="inputUserE"
-            value="CovetousTag4"
-          />
-          </div>
           <div>
               <br>
             <label for="names">Tipo de perfil </label>
@@ -40,7 +30,7 @@
             class="form-control"
             v-model="emailV"
             id="inputEmailE"
-            
+            @change="changeData"
           />
           </div>
           <div>
@@ -50,8 +40,8 @@
             type="text"
             class="form-control"
              v-model="nameV"
-            id="inputNameE"
-            
+            id="inputNameE"   
+            @change="changeData"         
           />
           </div>
           <div>
@@ -62,29 +52,17 @@
             class="form-control"
              v-model="lastNameV"
             id="inputLastnameE"
+            @change="changeData"
             
           />
-          </div>
-          <div>
-              <br>
-            <label for="cellphone">Telefono </label>
-            <input
-            type="text"
-            class="form-control"
-            id="inputCellphone"
-            value="8112148676"
-            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
           </div>
           </div>
         </div>
       </div>
       <div class="card-footer">
         <div class="container">
-          <div class="d-flex justify-content-around">
-             <button type="button" class="btn btn-danger btnE" disabled>
-              Borrar Cuenta
-            </button>
-            <button type="button" class="btn btn-success btnE">
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-success btnE" @click="editUser" :disabled="dataChanged">
               Guardar cambios
             </button>
           </div>
@@ -95,43 +73,58 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useStore } from "vuex";
 export default{
   
 setup() {
-
+  const dataChanged = ref(true)
+const store = useStore();
 const emailV = ref();
 const nameV = ref();
 const lastNameV = ref();
 const userTypeV = ref();
 
+onMounted(() =>{
+  emailV.value = store.state.email
+  nameV.value = store.state.name
+  lastNameV.value = store.state.last_name
+  userTypeV.value = store.state.user_type
+})
 
-var email = localStorage.getItem("email");
-var name = localStorage.getItem("name");
-var last_name = localStorage.getItem("last_name");
-var user_type = localStorage.getItem("user_type");
+function editUser () {
+  store.state.email = emailV.value;
+  store.state.name = nameV.value;
+  store.state.last_name = lastNameV.value;
 
-emailV.value = email;
-nameV.value = name;
-lastNameV.value = last_name;
-userTypeV.value = user_type;
-
-console.log(user_type);
-
+  var data = new FormData();
+  data.append("email", emailV.value)
+  data.append("name", nameV.value)
+  data.append("last_name", lastNameV.value)
+  for(var pair of data.entries()) {
+   console.log(pair[0]+ ', '+ pair[1]); 
+}
+}
+function changeData () {
+  dataChanged.value = false;
+}
 
 return{
 emailV,
 nameV,
 lastNameV,
-email,
-userTypeV
+userTypeV,
+store,
+editUser,
+changeData,
+dataChanged
 };
 
 }
 };
 </script>
 
-<style>
+<style scoped>
 .img-thumbnail {
   max-width: 100px;
   max-height: 100px;
@@ -143,5 +136,6 @@ userTypeV
   max-width: 30%;
   min-width: 30%;
   width: 30%;
+  margin-right: 10%;
 }
 </style>

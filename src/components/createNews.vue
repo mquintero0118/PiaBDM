@@ -67,7 +67,8 @@
                   type="file"
                   accept="image/png, image/gif, image/jpeg"
                   id="formFileMultipleImg"
-                  multiple
+                  ref="file"
+                  v-on:change="handleFileUpload()"
                 />
               </div>
               <br />
@@ -152,6 +153,7 @@ export default {
       month: "2-digit",
       day: "numeric",
     };
+    const file = ref(null)
     const title = ref("");
     const section = ref();
     var sections = ref([]);
@@ -163,6 +165,11 @@ export default {
     function confirm() {
       sendData();
     }
+    const handleFileUpload = async() => {
+           // debugger;
+            console.log("selected file",file.value.files)
+            //Upload to server
+        }
 
     async function sendData() {
       var data = new FormData();
@@ -180,6 +187,7 @@ export default {
       data.append("img", document.getElementById("formFileMultipleImg").value);
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
+      data.append("image", file.value.files);
 
       var datelocal = date.value.toLocaleDateString("en", options);
       var dateSQL =
@@ -288,6 +296,8 @@ export default {
       section,
       date,
       valueTags,
+      handleFileUpload,
+      file,
     };
   },
 };
