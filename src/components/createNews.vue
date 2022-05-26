@@ -28,22 +28,42 @@
               <br />
               <div>
                 <label for="text">Texto de la noticia </label>
-                <textarea type="text" id="newsText" class="form-control" />
+                <textarea
+                  type="text"
+                  id="newsText"
+                  class="form-control"
+                  v-model="texto"
+                />
               </div>
               <br />
               <div class="row">
                 <div class="d-flex bd-highlight">
-                  <div class=" flex-fill bd-highlight">
+                  <div class="flex-fill bd-highlight">
                     <label for="country">Pais </label>
-                    <input type="text" id="newsCountry" class="form-control" />
+                    <input
+                      type="text"
+                      id="newsCountry"
+                      class="form-control"
+                      v-model="pais"
+                    />
                   </div>
-                  <div class=" flex-fill bd-highlight">
+                  <div class="flex-fill bd-highlight">
                     <label for="state">Estado </label>
-                    <input type="text" id="newsState" class="form-control" />
+                    <input
+                      type="text"
+                      id="newsState"
+                      class="form-control"
+                      v-model="estado"
+                    />
                   </div>
-                  <div class=" flex-fill bd-highlight">
+                  <div class="flex-fill bd-highlight">
                     <label for="city">Ciudad </label>
-                    <input type="text" id="newsCity" class="form-control" />
+                    <input
+                      type="text"
+                      id="newsCity"
+                      class="form-control"
+                      v-model="ciudad"
+                    />
                   </div>
                 </div>
               </div>
@@ -106,12 +126,18 @@
                   :close-on-select="false"
                   :searchable="true"
                   :create-option="true"
+                  placeholder="Agrega una palabra dando 'Enter'"
                 />
               </div>
               <br />
               <div>
                 <label for="signature">Firma del reportero </label>
-                <input type="text" id="newsSignature" class="form-control" />
+                <input
+                  type="text"
+                  id="newsSignature"
+                  class="form-control"
+                  v-model="firma"
+                />
               </div>
             </div>
           </div>
@@ -120,13 +146,26 @@
       <div class="card-footer">
         <div class="container">
           <div class="d-flex justify-content-around">
-            <button type="button" class="btn btn-primary btnE">
+            <button
+              type="button"
+              class="btn btn-primary btnE"
+              @click="confirm(1)"
+            >
               En Redaccion
             </button>
-            <button type="button" class="btn btn-primary btnE" @click="confirm">
+            <button
+              type="button"
+              class="btn btn-primary btnE"
+              @click="confirm(2)"
+            >
               Terminar Noticia
             </button>
-            <img v-bind:src="image_path"  alt="Girl in a jacket" width="500" height="600">
+            <img
+              v-bind:src="image_path"
+              alt="Girl in a jacket"
+              width="500"
+              height="600"
+            />
           </div>
         </div>
       </div>
@@ -144,44 +183,94 @@ import "vue3-date-time-picker/dist/main.css";
 import Multiselect from "@vueform/multiselect";
 import axios from "axios";
 import { useStore } from "vuex";
+import { useToast } from "vue-toastification";
+import { useRouter } from "vue-router";
 
 export default {
   components: { Datepicker, Multiselect },
 
   setup() {
+     const router = useRouter();
     /* v-models */
-
+    const toast = useToast();
     var options = {
       year: "numeric",
       month: "2-digit",
       day: "numeric",
     };
-    const file = ref(null)
-    const video = ref(null)
+    const file = ref(null);
+
     const title = ref("");
     const section = ref();
     var sections = ref([]);
     const valueTags = ref();
     const date = ref(new Date());
     const store = useStore();
-    var image_path = ref("https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg");
+    var image_path = ref(
+      "https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg"
+    );
 
-    // const desc = ref('');
+    const desc = ref("");
+    const texto = ref("");
+    const pais = ref("");
+    const estado = ref("");
+    const ciudad = ref("");
+    const foto = ref(false);
+    const video = ref(false);
+    const videoV = ref(false);
+    const firma = ref("");
     /* Functions */
-    function confirm() {
-      sendData();
+    function confirm(value) {
+      if (value === 2) {
+        if (
+          !title.value ||
+          !desc.value ||
+          !texto.value ||
+          !pais.value ||
+          !estado.value ||
+          !ciudad.value ||
+          !date.value ||
+          !foto.value ||
+          !videoV.value ||
+          !section.value ||
+          !valueTags.value ||
+          !firma.value
+        ) {
+          toast.error("Porfavor llena todos los campos!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+        } else {
+          sendData(value);
+          toast.success("Noticia creada con exito!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+        }
+      } else if (value === 1) {
+        toast.success("Noticia en redaccion!", {
+          timeout: 1500,
+          zindex: 2000,
+        });
+        sendData(value);
+        
+      }
+      
     }
-    const handleFileUpload = async() => {
-           // debugger;
-            console.log("selected file",file.value.files)
-            //Upload to server
-        }
-        const handleVideoUpload = async() => {
-          console.log("selected file",video.value.files)
-        }
+    const handleFileUpload = async () => {
+      // debugger;
+      console.log("selected file", file.value.files);
+      foto.value = true;
+      //Upload to server
+    };
+    const handleVideoUpload = async () => {
+      console.log("selected file", video.value.files);
+      videoV.value = true;
+    };
 
-    async function sendData() {
+    async function sendData(value) {
       var data = new FormData();
+        data.append("statusId", value);
       data.append("title", document.getElementById("newsTitle").value);
       data.append("lead", document.getElementById("newsLead").value);
       data.append("text", document.getElementById("newsText").value);
@@ -197,8 +286,8 @@ export default {
       data.append("seccion", section.value);
       data.append("tag", valueTags.value);
       data.append("image", file.value.files[0]);
-      data.append("video",video.value.files[0]);
-      data.append("userId", store.state.user_id)
+      data.append("video", video.value.files[0]);
+      data.append("userId", store.state.user_id);
 
       var datelocal = date.value.toLocaleDateString("en", options);
       var dateSQL =
@@ -226,13 +315,13 @@ export default {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-         // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
+          // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
           "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
           data,
           {
             headers: {
               "Content-Type": "application/json",
-             // "Content-Type": "multipart/form-data",
+              // "Content-Type": "multipart/form-data",
             },
           }
         )
@@ -244,8 +333,9 @@ export default {
             //   }, 1000);
           } else {
             image_path.value = res.data.imagenSrc;
-            // setTimeout(() => {
-            //   }, 2000);
+            setTimeout(() => {
+        router.push({ path: "/mainPage" });
+      }, 1300);
           }
         })
         .catch((error) => {
@@ -315,6 +405,16 @@ export default {
       image_path,
       video,
       handleVideoUpload,
+      toast,
+      desc,
+      texto,
+      pais,
+      estado,
+      ciudad,
+      foto,
+      videoV,
+      firma,
+      router,
     };
   },
 };
