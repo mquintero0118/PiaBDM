@@ -72,14 +72,14 @@
       <li class="nav-item">
         <div class="d-flex justify-content-center">
           <div class="d-flex flex-wrap">
-<div v-for="index in 3" :key="index" class="card cardMain" style="width: 18rem">
-          <img src="./testImages/PP.jpg" class="card-img-top" alt="..." />
+<div v-for="(noticia, index) in noticias" :key="index" class="card cardMain" style="width: 18rem">
+          <img v-bind:src="noticia.MEDIA" class="card-img-top" alt="..." />
           <div class="card-body">
-            <h5 class="card-title">Club Penguin cerrara sus puertas</h5>
+        <h5 class="card-title">{{noticia.TITLE}}</h5>
             <p class="card-text">
-              Despues de una larga vida, Club Penguin cerrar sus puertas al publico...
+              {{noticia.LEAD_TEXT}}
             </p>
-            <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
+           <seeNews :noticia="noticiaIndex" @click="check(noticia)"/>
           </div>
         </div>
           </div>
@@ -115,7 +115,72 @@
 </template>
 
 <script>
+import { onMounted, ref } from '@vue/runtime-core'
+import axios from "axios";
+import seeNews from "./seeNews.vue";
 export default {
+  components:{seeNews},
+  setup() {
+    const noticiaIndex = ref({
+
+
+    });
+    let llego = ref(false);
+
+    function check(index){
+
+      noticiaIndex.value = index;
+      console.log(index);
+
+    }
+
+    let noticias = ref();
+    onMounted(() => {
+      /* aqui haces el get con axios*/
+      /* haces: noticias = res.data.data*/
+      /* console.log pa ber si jala*/
+
+       axios
+        .get(
+          //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
+          null,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.error == true) {
+            console.log("Ocurrio un error!", res.data);
+            //  setTimeout(() => {
+
+            //    }, 1000);
+          } else {
+            //    setTimeout(() => {
+            console.log(res.data);
+            noticias.value = res.data[0];
+            llego = true;
+
+            
+            //    }, 2000);
+          }
+        })
+        .catch((error) => {
+          console.log("Ocurrio un error en el servicio", error);
+          //   setTimeout(() => {
+
+          //  }, 2000);
+        });
+    })
+    return {
+      noticias,
+      noticiaIndex, 
+      check,
+      llego,
+    }
+  }
 
 }
 

@@ -40,30 +40,30 @@
                   >Editar Perfil</router-link
                 >
               </li>
-              <li class="dropdown-item">
+              <li  v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
                 <router-link to="/createReporter" class="nav-link"
                   >Registrar Reportero</router-link
                 >
               </li>
 
-              <li class="dropdown-item">
+              <li v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
                 <router-link to="/createSection" class="nav-link"
                   >Crear sección</router-link
                 >
               </li>
-              <li class="dropdown-item">
+              <li   v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
                 <router-link to="/editSection" class="nav-link"
                   >Editar sección</router-link
                 >
               </li>
               <li class="dropdown-item">
-                <button type="button" class="btn btn-danger btn-sm">
+                <button  @click="closeSession" type="button" class="btn btn-danger btn-sm">
                   <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
                 </button>
               </li>
             </ul>
           </li>
-          <li class="nav-item" v-if="store.state.name">
+          <li class="nav-item" v-if="store.state.name && store.state.user_type === 'Reportero'">
             <router-link to="/createNews" class="nav-link"
               >Crear Noticia</router-link
             >
@@ -73,16 +73,8 @@
               >Buscar Noticia</router-link
             >
           </li>
-          <li class="nav-item" v-if="store.state.name">
-            <button class="btn btn-danger" @click="closeSession">
-              Cerrar sesion
-            </button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-secondary" @click="testData">
-              test data
-            </button>
-          </li>
+         
+          
         </ul>
       </div>
     </div>

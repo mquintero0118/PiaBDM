@@ -248,6 +248,7 @@ export default {
       data.append("lastName", lastNameV.value)
       data.append("email", emailV.value);
       data.append("pass", passwordV.value);
+      data.append("userTypeId",2);
      
 for(var pair of data.entries()) {
    console.log(pair[0]+ ', '+ pair[1]); 
@@ -257,7 +258,7 @@ for(var pair of data.entries()) {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          "http://localhost/PIA_BDM/piaBDMBack/includes/register_inc.php?action=create",
           data,
           {
             headers: {
@@ -274,7 +275,7 @@ for(var pair of data.entries()) {
             }, 1000);
           } else {
             setTimeout(() => {
-              //console.log(res.data.error);
+              console.log(res.data.error);
               toastAlertSucess("Usuario creado con exito!");
               console.log(res);
               send2Main();

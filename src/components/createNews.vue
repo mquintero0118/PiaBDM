@@ -160,21 +160,13 @@
             >
               Terminar Noticia
             </button>
-            <img
-              v-bind:src="image_path"
-              alt="Girl in a jacket"
-              width="500"
-              height="600"
-            />
+         
           </div>
         </div>
       </div>
     </div>
   
-    <video width="600" height="400" controls  >
-      <source v-bind:src="video_path" >
-
-    </video>
+   
     
   </div>
   <br />

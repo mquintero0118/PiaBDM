@@ -253,6 +253,7 @@ export default {
       data.append("lastName", lastNameV.value)
       data.append("email", emailV.value);
       data.append("pass", passwordV.value);
+       data.append("userTypeId",3);
      
 for(var pair of data.entries()) {
    console.log(pair[0]+ ', '+ pair[1]); 
@@ -262,8 +263,8 @@ for(var pair of data.entries()) {
         .post(
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
-          "http://localhost:8070/piaBDMBack/piaBDMBack/includes/register_inc.php?action=create",
-         //"http://localhost/PIA_BDM/piaBDMBack/api.php?action=create",
+          //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/register_inc.php?action=create",
+         "http://localhost/PIA_BDM/piaBDMBack/includes/register_inc.php?action=create",
           data,
           {
             headers: {

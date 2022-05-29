@@ -1,126 +1,125 @@
 <template>
-  <div class="card cardseeNews">
-    <div class="card-header">Titulo de la noticia</div>
-    <div class="card-body">
-      <div class="d-flex flex-row bd-highlight mb-3">
-        <div class="p-2 bd-highlight">Fecha de la noticia</div>
-        <div class="p-2 bd-highlight">Lugar del acontecimiento</div>
+  <div>
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+Ver Noticia
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <img
-        src="./testImages/archonNewsBanner.png"
-        class="card-img-top cardImage"
-        alt="..."
-      />
-      <br />
-      <br />
-      <br />
-      <p class="paragraph">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum." "Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum."
-      </p>
+      <div class="modal-body">
+<div class="card-header">{{noticia.TITLE}}</div>
+      <div class="card-body">
+        <div class="d-flex flex-row bd-highlight mb-3">
+          <div class="p-2 bd-highlight">{{noticia.DATE_OF_EVENTS}}</div>
+          <div class="p-2 bd-highlight">{{noticia.CITY}} {{noticia.STATE}} {{noticia.COUNTRY}} </div>
+        </div>
+        <img
+           v-bind:src="noticia.MEDIA"
+          class="card-img-top cardImage"
+          alt="..."
+        />
+        <br />
+        <br />
+        <br />
+        <p class="paragraph">
+         {{noticia.LEAD_TEXT}}
+        </p>
 
-      <p class="paragraph">
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum." "Lorem ipsum dolor sit amet, consectetur
-        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-        in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-        qui officia deserunt mollit anim id est laborum."
-      </p>
+        <p class="paragraph">
+          {{noticia.NEWS_TEXT}}
+        </p>
 
-      <div class="d-flex bd-highlight mb-3">
-        <div class="p-2 bd-highlight stuff">Fecha de publicacion</div>
-        <div class="p-2 bd-highlight stuff">Firma del reportero</div>
+        <div class="d-flex bd-highlight mb-3">
+          <div class="p-2 bd-highlight stuff">{{noticia.PUBLISHED_DATE}}</div>
+          <div class="p-2 bd-highlight stuff">{{noticia.SIGNATURE}}</div>
 
-        <div class="ms-auto p-2 bd-highlight">
-          <div
-            class="btn-group"
-            role="group"
-            aria-label="Basic mixed styles example"
-          >
-            <button type="button" class="btn btn-info disable">6</button>
-            <button type="button" class="btn btn-info">
-              <i class="fas fa-heartbeat"></i> Like
-            </button>
+          <div class="ms-auto p-2 bd-highlight">
+            <div
+              class="btn-group"
+              role="group"
+              aria-label="Basic mixed styles example"
+            >
+              <button type="button" class="btn btn-info disable">{{noticia.LIKES}}</button>
+              <button type="button" class="btn btn-info">
+                <i class="fas fa-heartbeat"></i> Like
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="card-footer">
-      <div class="container-fluid">
-        <div>
-          <div class="d-flex justify-content-start">
-            <h3>Persona comentario 1</h3>
+      <div class="card-footer">
+        <div class="container-fluid">
+          <div>
+            <div class="d-flex justify-content-start">
+              <h3>Persona comentario 1</h3>
+            </div>
+            <div class="d-flex justify-content-start">
+              <h5>Texto Comentario 1</h5>
+            </div>
           </div>
-          <div class="d-flex justify-content-start">
-            <h5>Texto Comentario 1</h5>
+          <br />
+          <div>
+            <div class="d-flex justify-content-start">
+              <h3>Persona comentario 2</h3>
+            </div>
+            <div class="d-flex justify-content-start">
+              <h5>Texto Comentario 2</h5>
+            </div>
+          </div>
+          <br />
+          <div class="input-group commentGroup">
+            <input
+              type="text"
+              class="form-control comment"
+              placeholder="Escribe tu comentario"
+              aria-label="Input group example"
+              aria-describedby="btnGroupAddon"
+            />
+            <div class="btn btn-success" id="btnGroupAddon">
+              Publicar comentario
+            </div>
           </div>
         </div>
-        <br />
-        <div>
-          <div class="d-flex justify-content-start">
-            <h3>Persona comentario 2</h3>
-          </div>
-          <div class="d-flex justify-content-start">
-            <h5>Texto Comentario 2</h5>
-          </div>
-        </div>
-        <br />
-        <div class="input-group commentGroup">
-          <input
-            type="text"
-            class="form-control comment"
-            placeholder="Escribe tu comentario"
-            aria-label="Input group example"
-            aria-describedby="btnGroupAddon"
-          />
-          <div class="btn btn-success" id="btnGroupAddon">
-            Publicar comentario
-          </div>
-        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <h6>{{noticia.NEWS_ID}}</h6>
       </div>
     </div>
   </div>
-  <br>
-  <br>
-  <h1>Noticias Relacionadas</h1>
-  <div class="d-flex justify-content-center">
-  <div class="d-flex flex-wrap">
-<div v-for="index in 4" :key="index" class="card cardSecond" style="width: 10rem">
-          <img src="./testImages/newspaper.png" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">El mejor portal de noticias</h5>
-            <p class="card-text">
-              Archon News fue premiado como el mejor portal para noticias en el mundo...
-            </p>
-            <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
-          </div>
-        </div>
-        </div>
-        </div>
-  <br />
+</div>
+
+
+    
+   
+  </div>
 </template>
 
 <script>
-export default {};
+import {  ref } from "vue";
+export default {
+  props: ['noticia'],
+  setup(){
+    let showModal = ref(false);
+    function modal () {
+      showModal.value = !showModal.value;
+      console.log(showModal.value);
+    }
+    
+    return{
+      showModal,
+      modal,
+    }
+  }
+};
 </script>
 
 <style>
@@ -153,13 +152,13 @@ export default {};
   margin-top: 10px;
 }
 .disable:hover {
-  color: #FFFEFE;
-    background-color: #00B2B2;
-    border-color: #00B2B2;
+  color: #fffefe;
+  background-color: #00b2b2;
+  border-color: #00b2b2;
 }
 .disable:activeq {
-  color: #FFFEFE;
-    background-color: #00B2B2;
-    border-color: #00B2B2;
+  color: #fffefe;
+  background-color: #00b2b2;
+  border-color: #00b2b2;
 }
 </style>
