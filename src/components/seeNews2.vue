@@ -86,7 +86,18 @@ export default {
         console.log('work')
         console.log(props.query);
         let newsId = props.query
-        axios.post("http://localhost/piaBDMBack/includes/news_inc.php?action=selectByNewsId", newsId ).then((response) => {
+        var data = new FormData();
+        data.append("newsId", newsId)
+        for (var pair of data.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+
+        axios.post("http://localhost/piaBDMBack/includes/news_inc.php?action=selectByNewsId", data, {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          } ).then((response) => {
             console.log(response)
         })
 
