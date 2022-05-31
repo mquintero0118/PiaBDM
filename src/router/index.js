@@ -4,11 +4,12 @@ import Login from '../components/Login.vue'
 import MainPage from '../components/MainPage.vue'
 import EditProfile from '../components/EditProfile.vue'
 import CreateNews from '../components/createNews.vue'  
-import seeNews from '../components/seeNews.vue'
+import seeNews2 from '../components/seeNews2.vue'
 import searchNews from '../components/searchNews.vue'
 import createSection from '../components/createSection.vue'
 import editSection from '../components/editSection.vue'
 import createReporter from '../components/createReporter.vue'
+import pendingNews from '../components/pendingNews.vue'
 
 const routes = [
   {
@@ -17,6 +18,14 @@ const routes = [
     component: MainPage,
     meta: {
       title: 'Home',
+    },
+  },
+  {
+    path: '/pendingNews',
+    name: 'PendingNews',
+    component: pendingNews,
+    meta: {
+      title: 'PendingNews',
     },
   },
   {
@@ -60,12 +69,13 @@ const routes = [
     },
   },
   {
-    path: '/seeNews',
-    name: 'SeeNews',
-    component: seeNews,
+    path: '/seeNews2',
+    name: 'seeNews2',
+    component: seeNews2,
     meta: {
       title: 'See News',
     },
+    props: route => ({ query: route.query })
   },
   {
     path: '/searchNews',

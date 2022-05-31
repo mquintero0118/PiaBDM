@@ -318,7 +318,7 @@ export default {
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
           // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
-          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=create",
+          "http://localhost/piaBDMBack/includes/news_inc.php?action=create",
           data,
           {
             headers: {
@@ -334,6 +334,7 @@ export default {
 
             //   }, 1000);
           } else {
+            console.log(res)
             image_path.value = res.data.imagenSrc;
             video_path.value = res.data.videoSrc;
             console.log(video_path);
@@ -360,7 +361,7 @@ export default {
       axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/PIA_BDM/piaBDMBack/includes/section_inc.php?action=selectSections",
+          "http://localhost/piaBDMBack/includes/section_inc.php?action=selectSections",
           null,
           {
             headers: {

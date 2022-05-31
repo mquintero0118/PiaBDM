@@ -40,6 +40,11 @@
                   >Editar Perfil</router-link
                 >
               </li>
+              <li v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
+                <router-link to="/pendingNews" class="nav-link"
+                  >Noticias Pendientes</router-link
+                >
+              </li>
               <li  v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
                 <router-link to="/createReporter" class="nav-link"
                   >Registrar Reportero</router-link

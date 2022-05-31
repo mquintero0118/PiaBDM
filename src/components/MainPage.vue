@@ -79,7 +79,8 @@
             <p class="card-text">
               {{noticia.LEAD_TEXT}}
             </p>
-           <seeNews :noticia="noticiaIndex" @click="check(noticia)"/>
+          <!-- <seeNews :noticia="noticiaIndex" @click="check(noticia)"/> -->
+          <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button>
           </div>
         </div>
           </div>
@@ -117,10 +118,12 @@
 <script>
 import { onMounted, ref } from '@vue/runtime-core'
 import axios from "axios";
-import seeNews from "./seeNews.vue";
+import { useRouter } from "vue-router";
+// import seeNews from "./seeNews.vue";
 export default {
-  components:{seeNews},
+  // components:{seeNews},
   setup() {
+     const router = useRouter();
     const noticiaIndex = ref({
 
 
@@ -128,10 +131,10 @@ export default {
     let llego = ref(false);
 
     function check(index){
-
       noticiaIndex.value = index;
-      console.log(index);
-
+      console.log(index.NEWS_ID);
+     // router.push({ path: "/Login" });
+      router.push({ name: 'seeNews2', query: { newsId: index.NEWS_ID } })
     }
 
     let noticias = ref();
@@ -143,7 +146,7 @@ export default {
        axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/PIA_BDM/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
+          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
           null,
           {
             headers: {
@@ -159,7 +162,7 @@ export default {
             //    }, 1000);
           } else {
             //    setTimeout(() => {
-            console.log(res.data);
+            console.log(res);
             noticias.value = res.data[0];
             llego = true;
 

@@ -1,19 +1,5 @@
 <template>
-  <div>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-Ver Noticia
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Ver noticia {{noticia.NEWS_ID}}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
+  <div v-if="data">
 <div class="card-header">{{noticia.TITLE}}</div>
       <div class="card-body">
         <div class="d-flex flex-row bd-highlight mb-3">
@@ -79,34 +65,37 @@ Ver Noticia
           </div>
         </div>
       </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    
-   
   </div>
 </template>
 
 <script>
-import {  ref } from "vue";
+import {  onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+ const router = useRouter();
 export default {
-  props: ['noticia'],
-  setup(){
+  props: ['query'],
+  setup(props){
+      const data = ref(false)
     let showModal = ref(false);
     function modal () {
       showModal.value = !showModal.value;
       console.log(showModal.value);
     }
-    
+    onMounted(() => {
+        console.log('work')
+        console.log(props.query);
+        let newsId = props.query
+        axios.post("http://localhost/piaBDMBack/includes/news_inc.php?action=selectByNewsId", newsId ).then((response) => {
+            console.log(response)
+        })
+
+    })
     return{
       showModal,
       modal,
+      data,
+      router,
     }
   }
 };

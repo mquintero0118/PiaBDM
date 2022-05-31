@@ -139,7 +139,7 @@ for(var pair of data.entries()) {
       await axios
         .post(
          // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/login_inc.php?action=login",
-         "http://localhost/PIA_BDM/piaBDMBack/includes/login_inc.php?action=login",
+         "http://localhost/piaBDMBack/includes/login_inc.php?action=login",
           data,
           {
             headers: {
