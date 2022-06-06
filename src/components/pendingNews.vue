@@ -2,49 +2,32 @@
   <div class="card text-center cardSearchNews">
     <div class="card-body">
       <div
-        v-for="index in 3"
-        :key="index"
+        v-for="noticia in noticias"
+        :key="noticia.NEWS_ID"
         class="card mb-3 test"
         style="max-width: 5000px"
       >
         <div class="row g-0">
           <div class="col-md-4">
-            <img
-              src="./testImages/newspaper.png"
-              class="img-fluid rounded-start"
-              alt="..."
-            />
+            <img v-bind:src="noticia.MEDIA" class="card-img-top" alt="..." />
             <br />
-            <h6 class="card-title">
-              Estado de la noticia: {{ estadoSelected }}
-            </h6>
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h5 class="card-title">Titulo de la noticia</h5>
+              <h5 class="card-title">{{noticia.TITLE}}</h5>
               <p class="card-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Pellentesque scelerisque mi eget commodo maximus. Curabitur sed
-                vestibulum libero. Donec lacinia imperdiet purus eget tempus.
+                {{noticia.LEAD_TEXT}}
               </p>
               <div class="d-flex justify-content-evenly">
-                <router-link to="/seeNews" class="btn btn-primary"
-                  >Ver noticia</router-link
+                <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button>
                 >
-                <div class="btn-group" role="group" aria-label="Basic example">
+                <div class="btn-group" role="group" aria-label="Basic example" style="max-height: 60px !important">
                   <button
                     type="button"
                     class="btn btn-primary"
                     @click="changeState(0)"
                   >
                     {{ estados[0] }}
-                  </button>
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    @click="changeState(1)"
-                  >
-                    {{ estados[1] }}
                   </button>
                   <button
                     type="button"
@@ -79,8 +62,7 @@ export default {
       axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
-          null,
+          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectNewsTerminadas",
           {
             headers: {
               "Content-Type": "application/json",
@@ -91,9 +73,8 @@ export default {
           if (res.data.error == true) {
             console.log("Ocurrio un error!", res.data);
           } else {
-            console.log(res);
-            noticias.value = res.data;
-            console.log(noticias.value);
+            console.log(res.data[0]);
+            noticias.value = res.data[0]
           }
         })
         .catch((error) => {

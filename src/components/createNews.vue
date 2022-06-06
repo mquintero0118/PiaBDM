@@ -340,7 +340,7 @@ export default {
             console.log(video_path);
             console.log(image_path);
             setTimeout(() => {
-        //router.push({ path: "/mainPage" });
+        router.push({ path: "/mainPage" });
       }, 1300);
           }
         })
