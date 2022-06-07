@@ -91,10 +91,12 @@
 import { useStore } from "vuex";
 // import { ref,  } from "vue";
 import { onMounted } from "@vue/runtime-core";
+import { useRouter } from "vue-router";
 export default {
   name: "Navbar",
   setup() {
     const store = useStore();
+    const router = useRouter();
 
     function closeSession() {
       store.state.name = null;
@@ -102,6 +104,9 @@ export default {
       store.state.last_name = null;
       store.state.user_id = null;
       store.state.user_type = null;
+      setTimeout(() => {
+        router.push({ path: "/mainPage" });
+      }, 1300);
     }
 
     function testData() {
@@ -112,6 +117,7 @@ export default {
       store,
       testData,
       closeSession,
+      router,
     };
   },
 };
