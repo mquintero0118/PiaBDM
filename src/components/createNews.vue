@@ -194,7 +194,7 @@ export default {
     var options = {
       year: "numeric",
       month: "2-digit",
-      day: "numeric",
+      day: "2-digit",
     };
     const file = ref(null);
 
