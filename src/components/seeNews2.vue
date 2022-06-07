@@ -158,7 +158,7 @@ export default {
 
       axios
         .post(
-          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
           data,
           {
             headers: {

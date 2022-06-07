@@ -146,7 +146,7 @@ export default {
        axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectRecentNews",
           null,
           {
             headers: {
