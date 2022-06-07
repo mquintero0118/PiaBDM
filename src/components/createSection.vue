@@ -83,7 +83,7 @@ export default {
 await axios
         .post(
          
-          "http://localhost/piaBDMBack/includes/section_inc.php?action=create",
+          "http://archonnews.com/piaBDMBack/includes/section_inc.php?action=create",
          
           data,
           {

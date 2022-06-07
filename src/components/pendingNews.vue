@@ -62,7 +62,7 @@ export default {
       axios
         .get(
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/section_inc.php?action=selectSections",
-          "http://localhost/piaBDMBack/includes/news_inc.php?action=selectNewsTerminadas",
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectNewsTerminadas",
           {
             headers: {
               "Content-Type": "application/json",

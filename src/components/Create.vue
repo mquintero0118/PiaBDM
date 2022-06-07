@@ -264,7 +264,7 @@ for(var pair of data.entries()) {
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
           //"http://localhost:8070/piaBDMBack/piaBDMBack/includes/register_inc.php?action=create",
-         "http://localhost/piaBDMBack/includes/register_inc.php?action=create",
+         "http://archonnews.com/piaBDMBack/includes/register_inc.php?action=create",
           data,
           {
             headers: {
