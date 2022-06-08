@@ -25,14 +25,14 @@
                   <button
                     type="button"
                     class="btn btn-primary"
-                    @click="changeState(0)"
+                    @click="changeState(0, noticia.NEWS_ID)"
                   >
                     {{ estados[0] }}
                   </button>
                   <button
                     type="button"
                     class="btn btn-primary"
-                    @click="changeState(2)"
+                    @click="changeState(2, noticia.NEWS_ID)"
                   >
                     {{ estados[2] }}
                   </button>
@@ -55,8 +55,13 @@ export default {
     const noticias = ref();
     const estadoSelected = ref("En redaccion");
     const estados = ref(["En redaccion", "Terminada", "Publicada"]);
-    function changeState(index) {
+    function changeState(index, id) {
       estadoSelected.value = estados.value[index];
+      if (index === 2){
+        let newsId = id
+        console.log(newsId)
+        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews")
+      }
     }
     function getNews() {
       axios
