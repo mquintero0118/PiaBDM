@@ -100,24 +100,26 @@
   </div>
   <div class="card-footer">
     <div class="container-fluid">
-      <div>
+      <div v-for="(comment, index) in comments" :key="index">
         <div class="d-flex justify-content-start">
-          <h4>Persona comentario 1</h4>
+          <h4>{{comment.EMAIL}}</h4>
         </div>
-        <div class="d-flex justify-content-start">
-          <h5>Texto Comentario 1</h5>
+        <div  class="d-flex justify-content-start">
+          <h5>{{comment.COMMENT_TEXT}}</h5>
         </div>
+        <br>
       </div>
       <br />
       <div class="input-group commentGroup">
         <input
           type="text"
+          v-model="commentText"
           class="form-control comment"
           placeholder="Escribe tu comentario"
           aria-label="Input group example"
           aria-describedby="btnGroupAddon"
         />
-        <div class="btn btn-success" id="btnGroupAddon">
+        <div  @click="createComment()" class="btn btn-success" id="btnGroupAddon">
           Publicar comentario
         </div>
       </div>
@@ -129,19 +131,84 @@
 import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { useStore } from "vuex";
 const router = useRouter();
 export default {
   props: ["query"],
   setup(props) {
     const showVideo = ref(false);
     const noticia = ref("");
+    const comments = ref("");
+    const commentText = ref("");
     var video_path = ref("");
+    const store = useStore();
     const data = ref(false);
     let showModal = ref(false);
     function modal() {
       showModal.value = !showModal.value;
       console.log(showModal.value);
     }
+
+   function createComment(){
+     let newsId = props.query;
+      var data = new FormData();
+     data.append("userId", store.state.user_id);
+    data.append("newsId", newsId.newsId);
+    data.append("comment", commentText.value);
+
+       for (var pair of data.entries()) {
+        console.log(pair[0] + ", " + pair[1]);
+      }
+
+      commentText.value = "";
+  
+ 
+     axios
+        .post(
+          "http://archonnews.com/piaBDMBack/includes/comments_inc.php?action=create",
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data[0][0]);
+          noticia.value = response.data[0][0];
+          comments.value = response.data[1];
+          console.log(comments.value);
+          video_path.value = response.data[0][1].MEDIA;
+          showVideo.value = true;
+        });
+
+     var data2 = new FormData();
+     data2.append("newsId", newsId.newsId);
+         axios
+        .post(
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
+          data2,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data[0][0]);
+          noticia.value = response.data[0][0];
+          comments.value = response.data[1];
+          console.log(comments.value);
+          video_path.value = response.data[0][1].MEDIA;
+          showVideo.value = true;
+        });
+
+   }
+
     watch();
     onMounted(() => {
       console.log("work");
@@ -149,6 +216,8 @@ export default {
       let newsId = props.query;
       console.log(newsId.newsId);
       var data = new FormData();
+
+     
 
       data.append("newsId", newsId.newsId);
 
@@ -171,6 +240,8 @@ export default {
           console.log(response);
           console.log(response.data[0][0]);
           noticia.value = response.data[0][0];
+          comments.value = response.data[1];
+          console.log(comments.value);
           video_path.value = response.data[0][1].MEDIA;
           showVideo.value = true;
         });
@@ -181,8 +252,11 @@ export default {
       data,
       router,
       noticia,
+      comments,
       video_path,
       showVideo,
+      createComment,
+      commentText,
     };
   },
 };

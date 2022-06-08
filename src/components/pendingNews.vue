@@ -20,7 +20,7 @@
               </p>
               <div class="d-flex justify-content-evenly">
                 <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button>
-                >
+                
                 <div class="btn-group" role="group" aria-label="Basic example" style="max-height: 60px !important">
                   <button
                     type="button"
