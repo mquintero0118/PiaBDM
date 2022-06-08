@@ -32,6 +32,57 @@
   </div>
   <br />
   <button class="btn btn-primary" @click="sendData()">Buscar</button>
+  <br>
+  <br>
+  <div v-if="isNoticia">
+      <div class="card text-center cardSearchNews">
+    <div class="card-body">
+        <div class="d-flex justify-content-around">
+            <h4>Titulo</h4>
+            <h4>Descripcion</h4>
+            <h4>Fecha</h4>
+            <h4>Likes</h4>
+            <h4>comments</h4>
+        </div>
+    </div>
+  </div>
+  <div class="card text-center cardSearchNews" v-for="reporte in reportes" :key="reporte.NEWS_ID">
+    <div class="card-body">
+        <div class="d-flex justify-content-around">
+            <h4>{{reporte.TITLE}}</h4>
+            <h4>{{reporte.DESCRIPTION}}</h4>
+            <h4>{{reporte.PUBLISHED_DATE}}</h4>
+            <h4>{{reporte.LIKES}}</h4>
+            <h4>{{reporte.COMMENTS}}</h4>
+        </div>
+    </div>
+  </div>
+  </div>
+  <div v-if="!isNoticia">
+      <div class="card text-center cardSearchNews">
+    <div class="card-body">
+        <div class="d-flex justify-content-around">
+            <h4>Seccion</h4>
+            <h4>Año</h4>
+            <h4>Mes</h4>
+            <h4>Likes</h4>
+            <h4>comments</h4>
+        </div>
+    </div>
+  </div>
+  <div class="card text-center cardSearchNews" v-for="reporte in reportes" :key="reporte.NEWS_ID">
+    <div class="card-body">
+        <div class="d-flex justify-content-around">
+            <h4>{{reporte.DESCRIPTION}}</h4>
+            <h4>{{reporte.YEAR}}</h4>
+            <h4>{{reporte.MONTH}}</h4>
+            <h4>{{reporte.LIKES}}</h4>
+            <h4>{{reporte.COMMENTS}}</h4>
+        </div>
+    </div>
+  </div>
+  </div>
+  
 </template>
 
 <script>
@@ -44,6 +95,8 @@ import Multiselect from "@vueform/multiselect";
 export default {
   components: { Datepicker, Multiselect },
   setup() {
+      const isNoticia = ref(true);
+      const reportes = ref();
     var sections = ref([]);
     var options = {
       year: "numeric",
@@ -91,15 +144,34 @@ export default {
       for (var pair of data.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
-      axios.post("http://archonnews.com/piaBDMBack/includes/reportes_inc.php?action=reporteNoticia", data,
+      if(section2.value === 'Noticia'){
+axios.post("http://archonnews.com/piaBDMBack/includes/reportes_inc.php?action=reporteNoticia", data,
       {
             headers: {
               "Content-Type": "application/json",
               // "Content-Type": "multipart/form-data",
             },
           }).then((response) => {
-              console.log(response)
+              reportes.value = response.data[0]
+              console.log(reportes.value)
+              isNoticia.value = true;
+
           })
+      } else {
+          axios.post("http://archonnews.com/piaBDMBack/includes/reportes_inc.php?action=reporteSecciones", data,
+      {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }).then((response) => {
+              reportes.value = response.data[0]
+              console.log(reportes.value)
+              isNoticia.value = false;
+
+          })
+      }
+      
     }
     onMounted(() => {
       const startDate = new Date();
@@ -117,6 +189,8 @@ export default {
       section2,
       sendData,
       options,
+      reportes,
+      isNoticia,
     };
   },
 };
