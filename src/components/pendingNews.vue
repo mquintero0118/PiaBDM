@@ -60,7 +60,10 @@ export default {
       if (index === 2){
         let newsId = id
         console.log(newsId)
-        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews")
+        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews", newsId).then((response) => {
+          console.log(response)
+          this.getNews();
+        })
       }
     }
     function getNews() {
