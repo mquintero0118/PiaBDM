@@ -94,6 +94,9 @@
           <button type="button" class="btn btn-info">
             <i class="fas fa-heartbeat"></i> Like
           </button>
+          <button type="button" class="btn btn-info" @click="share()">
+            <i class="fa fa-share"></i>  Compartir
+          </button>
         </div>
       </div>
     </div>
@@ -147,11 +150,13 @@ export default {
     const store = useStore();
     const data = ref(false);
     let showModal = ref(false);
+    function share(){
+      console.log('aqui haces lo del api we')
+    }
     function modal() {
       showModal.value = !showModal.value;
       console.log(showModal.value);
     }
-
    function createComment(){
      let newsId = props.query;
       var data = new FormData();
@@ -261,6 +266,7 @@ export default {
       createComment,
       commentText,
       store,
+      share,
     };
   },
 };
