@@ -107,10 +107,13 @@
         <div  class="d-flex justify-content-start">
           <h5>{{comment.COMMENT_TEXT}}</h5>
         </div>
+         <div  class="d-flex justify-content-start">
+          <h6>{{comment.CREATION_DATE}}</h6>
+        </div>
         <br>
       </div>
       <br />
-      <div class="input-group commentGroup">
+      <div v-if="store.state.name && store.state.user_type !== 'Editor'" class="input-group commentGroup">
         <input
           type="text"
           v-model="commentText"
@@ -257,6 +260,7 @@ export default {
       showVideo,
       createComment,
       commentText,
+      store,
     };
   },
 };

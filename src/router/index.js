@@ -10,6 +10,8 @@ import createSection from '../components/createSection.vue'
 import editSection from '../components/editSection.vue'
 import createReporter from '../components/createReporter.vue'
 import pendingNews from '../components/pendingNews.vue'
+import pendingNewsReporter from '../components/pendingNewsReporter.vue'
+import createNewsEnRedaccion from '../components/createNewsEnRedaccion.vue'
 
 const routes = [
   {
@@ -111,6 +113,26 @@ const routes = [
     },
     
   },
+  {
+    path: '/pendingNewsReporter',
+    name: 'PendingNewsReporter',
+    component: pendingNewsReporter,
+    meta: {
+      title: 'Pending News',
+    },
+    
+  },
+
+  {
+    path: '/createNewsEnRedaccion',
+    name: 'CreateNewsEnRedaccion',
+    component: createNewsEnRedaccion,
+    meta: {
+      title: 'Create News',
+    },
+    props: route => ({ query: route.query })
+  },
+
   {
     path: '/about',
     name: 'About',

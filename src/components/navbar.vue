@@ -73,6 +73,11 @@
               >Crear Noticia</router-link
             >
           </li>
+          <li class="nav-item" v-if="store.state.name && store.state.user_type === 'Reportero'">
+            <router-link to="/pendingNewsReporter" class="nav-link"
+              >Noticias Pendientes</router-link
+            >
+          </li>
           <li class="nav-item">
             <router-link to="/searchNews" class="nav-link"
               >Buscar Noticia</router-link

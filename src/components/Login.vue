@@ -152,7 +152,7 @@ for(var pair of data.entries()) {
             console.log("Ocurrio un error!", res.data);
             setTimeout(() => {
               loader();
-              toastAlertError("El correo ya esta registrado");
+              toastAlertError("Correo o contraseña incorrectos");
             }, 1000);
           } else {
             setTimeout(() => {
