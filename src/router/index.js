@@ -12,6 +12,7 @@ import createReporter from '../components/createReporter.vue'
 import pendingNews from '../components/pendingNews.vue'
 import pendingNewsReporter from '../components/pendingNewsReporter.vue'
 import createNewsEnRedaccion from '../components/createNewsEnRedaccion.vue'
+import reporte from '../components/reporte.vue'
 
 const routes = [
   {
@@ -28,6 +29,14 @@ const routes = [
     component: pendingNews,
     meta: {
       title: 'PendingNews',
+    },
+  },
+  {
+    path: '/reporte',
+    name: 'Reporte',
+    component: reporte,
+    meta: {
+      title: 'Reporte',
     },
   },
   {

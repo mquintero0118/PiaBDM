@@ -61,6 +61,11 @@
                   >Editar sección</router-link
                 >
               </li>
+              <li   v-if="store.state.name && store.state.user_type === 'Editor'" class="dropdown-item">
+                <router-link to="/reporte" class="nav-link"
+                  >Reporte</router-link
+                >
+              </li>
               <li class="dropdown-item">
                 <button  @click="closeSession" type="button" class="btn btn-danger btn-sm">
                   <i class="fas fa-sign-out-alt"></i> Cerrar Sesion
