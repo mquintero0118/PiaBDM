@@ -27,9 +27,10 @@
         <h5 class="card-title">{{noticia.TITLE}}</h5>
         <p class="card-text">
            {{noticia.LEAD_TEXT}} </p>
-         
+         <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button>
       </div>
     </div>
+    
   </div>
 </div>
     </div>
@@ -42,10 +43,22 @@
 <script>
 import { ref } from '@vue/reactivity';
  import axios from 'axios'
+ import { useRouter } from "vue-router";
 export default {
   setup() {
+    const router = useRouter();
+    const noticiaIndex = ref({
+
+
+    });
     const word = ref();
     const noticias = ref();
+    function check(index){
+      noticiaIndex.value = index;
+      console.log(index.NEWS_ID);
+     // router.push({ path: "/Login" });
+      router.push({ name: 'seeNews2', query: { newsId: index.NEWS_ID } })
+    }
     function search(){
       var data = new FormData();
       data.append("searchText", word.value);
@@ -60,6 +73,7 @@ export default {
       search,
       word,
       noticias,
+      check
     }
   }
 };
