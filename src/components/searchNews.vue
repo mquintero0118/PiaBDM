@@ -9,8 +9,9 @@
           placeholder="¿Que noticia buscas?"
           aria-label="Input group example"
           aria-describedby="btnGroupAddon"
+          v-model="word"
         />
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" @click="search()" v-if="word">
           <i class="fa fa-search"></i> Buscar
         </button>
       </div>
@@ -40,7 +41,25 @@
 </template>
 
 <script>
-export default {};
+import { ref } from '@vue/reactivity';
+ import axios from 'axios'
+export default {
+  setup() {
+    const word = ref();
+    function search(){
+      var data = new FormData();
+      data.append("searchText", word.value);
+      axios.post("http://archonnews.com/piaBDMBack/includes/search_inc.php?action=searchByLeadText", data).then((response) => {
+        console.log(response)
+      })
+    }
+
+    return {
+      search,
+      word,
+    }
+  }
+};
 </script>
 
 <style>
