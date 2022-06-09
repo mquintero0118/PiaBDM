@@ -139,6 +139,18 @@
                   v-model="firma"
                 />
               </div>
+              <br>
+              <div>
+                <label for="signature">Comentarios del editor </label>
+                <input
+                  type="text"
+                  id="newsSignature"
+                  class="form-control"
+                  v-model="elComment"
+                  disabled
+                />
+                
+              </div>
             </div>
           </div>
         </div>
@@ -198,6 +210,7 @@ export default {
     };
     const file = ref(null);
         const noticia = ref("");
+        const comments = ref();
     const title = ref("");
     const section = ref();
     var sections = ref([]);
@@ -219,6 +232,7 @@ export default {
     const video = ref(false);
     const videoV = ref(false);
     const firma = ref("");
+    const elComment = ref("");
     /* Functions */
     function confirm(value) {
       if (value === 2) {
@@ -384,7 +398,7 @@ export default {
 
             res.data[0].forEach((element) => {
               sections.value.push(element["DESCRIPTION"]);
-              console.log(element);
+              
             });
 
             //  sections.value = [res.data[0][0].DESCRIPTION, res.data[0][1].DESCRIPTION, res.data[0][2].DESCRIPTION];
@@ -432,6 +446,10 @@ export default {
           date.value = noticia.value[0].DATE_OF_EVENTS;
           firma.value = noticia.value[0].SIGNATURE;
 
+
+          comments.value = response.data[1][0];
+          elComment.value = comments.value.COMMENT_TEXT;
+
                
         });
 
@@ -465,6 +483,8 @@ export default {
       router,
       showVideo,
       noticia,
+      comments,
+      elComment,
     };
   },
 };
