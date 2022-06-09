@@ -217,7 +217,52 @@ export default {
     }
     function deleteComment(id){
       console.log(id)
+       var dataComment = new FormData();
+      dataComment.append("commentId", id);
+      axios
+        .post(
+          "http://archonnews.com/piaBDMBack/includes/comments_inc.php?action=delete",
+          dataComment,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+        
+         
+        });
+        
+          let newsId = props.query;
+            var data2 = new FormData();
+      data2.append("newsId", newsId.newsId);
+      axios
+        .post(
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
+          data2,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          console.log(response.data[0][0]);
+          noticia.value = response.data[0][0];
+          comments.value = response.data[1];
+          console.log(comments.value);
+          video_path.value = response.data[0][1].MEDIA;
+          showVideo.value = true;
+        });
+
     }
+
+
     function createComment() {
       let newsId = props.query;
       var data = new FormData();
