@@ -25,6 +25,13 @@
                   <button
                     type="button"
                     class="btn btn-primary"
+                    @click="seeNew(noticia.NEWS_ID)"
+                  >
+                    Ver noticia
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
                     @click="changeState(0, noticia.NEWS_ID)"
                   >
                     {{ estados[0] }}
@@ -50,11 +57,17 @@
 import { ref } from "@vue/reactivity";
 import { onMounted } from "@vue/runtime-core";
 import axios from "axios";
+import { useRouter } from "vue-router";
 export default {
   setup() {
+    const router = useRouter();
     const noticias = ref();
     const estadoSelected = ref("En redaccion");
     const estados = ref(["En redaccion", "Terminada", "Publicada"]);
+    function seeNew(id){
+      console.log(id)
+      router.push({ name: 'seeNews3', query: { newsId: id } })
+    }
     function changeState(index, id) {
       estadoSelected.value = estados.value[index];
       if (index === 2){
@@ -119,6 +132,8 @@ export default {
       changeState,
       getNews,
       noticias,
+      seeNew,
+      router,
     };
   },
 };

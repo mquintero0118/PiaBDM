@@ -103,7 +103,7 @@
             <p class="card-text">
               Archon News fue premiado como el mejor portal para noticias en el mundo...
             </p>
-            <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
+           
           </div>
         </div>
         </div>

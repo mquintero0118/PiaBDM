@@ -27,7 +27,7 @@
         <p class="card-text">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque mi eget commodo maximus. Curabitur sed vestibulum libero. Donec lacinia imperdiet purus eget tempus. Donec ut porttitor arcu. Fusce imperdiet, magna quis lacinia semper, felis sapien sagittis risus, id malesuada mauris quam eu nisi. Cras tortor risus, dictum eu congue sed, convallis eu felis. Nullam ultricies efficitur euismod. Vestibulum vel lorem vel orci facilisis fermentum. Integer varius eget ligula ac lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
             </p>
-         <router-link to="/seeNews" class="btn btn-primary">Ver noticia</router-link>
+         
       </div>
     </div>
   </div>

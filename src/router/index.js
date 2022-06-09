@@ -13,6 +13,7 @@ import pendingNews from '../components/pendingNews.vue'
 import pendingNewsReporter from '../components/pendingNewsReporter.vue'
 import createNewsEnRedaccion from '../components/createNewsEnRedaccion.vue'
 import reporte from '../components/reporte.vue'
+import seeNews3 from '../components/seeNews3.vue'
 
 const routes = [
   {
@@ -83,6 +84,15 @@ const routes = [
     path: '/seeNews2',
     name: 'seeNews2',
     component: seeNews2,
+    meta: {
+      title: 'See News',
+    },
+    props: route => ({ query: route.query })
+  },
+  {
+    path: '/seeNews3',
+    name: 'seeNews3',
+    component: seeNews3,
     meta: {
       title: 'See News',
     },
