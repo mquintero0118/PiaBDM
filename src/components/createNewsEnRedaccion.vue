@@ -262,14 +262,19 @@ export default {
           });
         }
       } else if (value === 1) {
-
-        toast.success("Noticia en redaccion!", {
-          timeout: 1500,
-          zindex: 2000,
-        });
-        sendData(value);
-              showVideo = true;
-
+        if (!title.value || !desc.value) {
+          toast.error("Porfavor llena todos los campos!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+        } else {
+          toast.success("Noticia en redaccion!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+          sendData(value);
+          showVideo = true;
+        }
       }
       
     }

@@ -160,14 +160,10 @@
             >
               Terminar Noticia
             </button>
-         
           </div>
         </div>
       </div>
     </div>
-  
-   
-    
   </div>
   <br />
   <br />
@@ -188,7 +184,7 @@ export default {
   components: { Datepicker, Multiselect },
 
   setup() {
-     const router = useRouter();
+    const router = useRouter();
     /* v-models */
     const toast = useToast();
     var options = {
@@ -207,7 +203,7 @@ export default {
     var image_path = ref(
       "https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg"
     );
-  var showVideo = false;
+    var showVideo = false;
     var video_path = ref("");
 
     const desc = ref("");
@@ -248,16 +244,20 @@ export default {
           });
         }
       } else if (value === 1) {
-
-        toast.success("Noticia en redaccion!", {
-          timeout: 1500,
-          zindex: 2000,
-        });
-        sendData(value);
-              showVideo = true;
-
+        if (!title.value || !desc.value) {
+          toast.error("Porfavor llena todos los campos!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+        } else {
+          toast.success("Noticia en redaccion!", {
+            timeout: 1500,
+            zindex: 2000,
+          });
+          sendData(value);
+          showVideo = true;
+        }
       }
-      
     }
     const handleFileUpload = async () => {
       // debugger;
@@ -272,7 +272,7 @@ export default {
 
     async function sendData(value) {
       var data = new FormData();
-        data.append("statusId", value);
+      data.append("statusId", value);
       data.append("title", document.getElementById("newsTitle").value);
       data.append("lead", document.getElementById("newsLead").value);
       data.append("text", document.getElementById("newsText").value);
@@ -334,14 +334,14 @@ export default {
 
             //   }, 1000);
           } else {
-            console.log(res)
+            console.log(res);
             image_path.value = res.data.imagenSrc;
             video_path.value = res.data.videoSrc;
             console.log(video_path);
             console.log(image_path);
             setTimeout(() => {
-        router.push({ path: "/mainPage" });
-      }, 1300);
+              router.push({ path: "/mainPage" });
+            }, 1300);
           }
         })
         .catch((error) => {
