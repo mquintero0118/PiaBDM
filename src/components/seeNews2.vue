@@ -64,9 +64,9 @@
         </div>
       </div>
     </div>
-    <br>
-    <hr>
-    <br>
+    <br />
+    <hr />
+    <br />
 
     <p class="paragraph">
       {{ noticia.LEAD_TEXT }}
@@ -75,9 +75,9 @@
     <p class="paragraph">
       {{ noticia.NEWS_TEXT }}
     </p>
-<br>
-    <hr>
-    <br>
+    <br />
+    <hr />
+    <br />
     <div class="d-flex bd-highlight mb-3">
       <div class="p-2 bd-highlight stuff">{{ noticia.PUBLISHED_DATE }}</div>
       <div class="p-2 bd-highlight stuff">{{ noticia.SIGNATURE }}</div>
@@ -95,17 +95,15 @@
             <i class="fas fa-heartbeat"></i> Like
           </button>
           <button type="button" class="btn btn-info" @click="share()">
-            <i class="fa fa-share"></i> 
+            <i class="fa fa-share"></i>
             <ShareNetwork
-
-    network="facebook"
-    v-bind:url="noticiaUrl"
-    title="Mira esta noticia en ArchonNews"
-
-    hashtags="ArchonNews"
-  >
-    Compartir
-</ShareNetwork>
+              network="facebook"
+              v-bind:url="noticiaUrl"
+              title="Mira esta noticia en ArchonNews"
+              hashtags="ArchonNews"
+            >
+              Compartir
+            </ShareNetwork>
           </button>
         </div>
       </div>
@@ -115,18 +113,26 @@
     <div class="container-fluid">
       <div v-for="(comment, index) in comments" :key="index">
         <div class="d-flex justify-content-start">
-          <h4>{{comment.EMAIL}}</h4>
+          <h4>{{ comment.EMAIL }}</h4>
         </div>
-        <div  class="d-flex justify-content-start">
-          <h5>{{comment.COMMENT_TEXT}}</h5>
+        <div class="d-flex bd-highlight">
+          <div class="bd-highlight">
+            <h5>{{ comment.COMMENT_TEXT }}</h5>
+          </div>
+          <div class="ms-auto bd-highlight" v-if="store.state.user_type === 'Editor'">
+            <button class="btn btn-danger" @click="deleteComment(comment.COMMENT_ID)"><i class="fas fa-trash-alt"></i></button>
+          </div>
         </div>
-         <div  class="d-flex justify-content-start">
-          <h6>{{comment.CREATION_DATE}}</h6>
+        <div class="d-flex justify-content-start">
+          <h6>{{ comment.CREATION_DATE }}</h6>
         </div>
-        <br>
+        <hr>
       </div>
       <br />
-      <div v-if="store.state.name && store.state.user_type !== 'Editor'" class="input-group commentGroup">
+      <div
+        v-if="store.state.name && store.state.user_type !== 'Editor'"
+        class="input-group commentGroup"
+      >
         <input
           type="text"
           v-model="commentText"
@@ -135,19 +141,19 @@
           aria-label="Input group example"
           aria-describedby="btnGroupAddon"
         />
-        <div  @click="createComment()" class="btn btn-success" id="btnGroupAddon">
+        <div
+          @click="createComment()"
+          class="btn btn-success"
+          id="btnGroupAddon"
+        >
           Publicar comentario
         </div>
       </div>
     </div>
   </div>
-  <br>
-  <br>
+  <br />
+  <br />
 </template>
-
-
-
-
 
 <script>
 import { onMounted, ref, watch } from "vue";
@@ -158,8 +164,6 @@ const router = useRouter();
 export default {
   props: ["query"],
   setup(props) {
-
-
     var noticiaUrl = "http://archonnews.com";
     const showVideo = ref(false);
     const noticia = ref("");
@@ -176,11 +180,15 @@ export default {
       console.log(newsId.newsId);
       var data = new FormData();
       data.append("newsId", newsId.newsId);
-      axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=likeNews", data).then((response) => {
-      console.log(response)
-      
-    })
-    
+      axios
+        .post(
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=likeNews",
+          data
+        )
+        .then((response) => {
+          console.log(response);
+        });
+
       axios
         .post(
           "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
@@ -201,30 +209,29 @@ export default {
           video_path.value = response.data[0][1].MEDIA;
           showVideo.value = true;
         });
-
     }
-    function share(){
-     
-    }
+    function share() {}
     function modal() {
       showModal.value = !showModal.value;
       console.log(showModal.value);
     }
-   function createComment(){
-     let newsId = props.query;
+    function deleteComment(id){
+      console.log(id)
+    }
+    function createComment() {
+      let newsId = props.query;
       var data = new FormData();
-     data.append("userId", store.state.user_id);
-    data.append("newsId", newsId.newsId);
-    data.append("comment", commentText.value);
+      data.append("userId", store.state.user_id);
+      data.append("newsId", newsId.newsId);
+      data.append("comment", commentText.value);
 
-       for (var pair of data.entries()) {
+      for (var pair of data.entries()) {
         console.log(pair[0] + ", " + pair[1]);
       }
 
       commentText.value = "";
-  
- 
-     axios
+
+      axios
         .post(
           "http://archonnews.com/piaBDMBack/includes/comments_inc.php?action=create",
           data,
@@ -245,9 +252,9 @@ export default {
           showVideo.value = true;
         });
 
-     var data2 = new FormData();
-     data2.append("newsId", newsId.newsId);
-         axios
+      var data2 = new FormData();
+      data2.append("newsId", newsId.newsId);
+      axios
         .post(
           "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=selectByNewsId",
           data2,
@@ -267,8 +274,7 @@ export default {
           video_path.value = response.data[0][1].MEDIA;
           showVideo.value = true;
         });
-
-   }
+    }
 
     watch();
     onMounted(() => {
@@ -277,8 +283,6 @@ export default {
       let newsId = props.query;
       console.log(newsId.newsId);
       var data = new FormData();
-
-     
 
       data.append("newsId", newsId.newsId);
 
@@ -306,8 +310,6 @@ export default {
           video_path.value = response.data[0][1].MEDIA;
           showVideo.value = true;
         });
-
-    
     });
     return {
       showModal,
@@ -324,6 +326,7 @@ export default {
       share,
       noticiaUrl,
       like,
+      deleteComment,
     };
   },
 };
