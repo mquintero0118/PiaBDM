@@ -17,17 +17,16 @@
       </div>
     </div>
     <div class="card-body">
-<div v-for="index in 3" :key="index" class="card mb-3 test" style="max-width: 5000px;">
+<div v-for="(noticia, index) in noticias" :key="index" class="card mb-3 test" style="max-width: 5000px;">
   <div class="row g-0">
     <div class="col-md-4">
-      <img src="./testImages/newspaper.png" class="img-fluid rounded-start" alt="...">
+      <img v-bind:src="noticia.MEDIA" class="img-fluid rounded-start" alt="...">
     </div>
     <div class="col-md-8">
       <div class="card-body">
-        <h5 class="card-title">Titulo de la noticia</h5>
+        <h5 class="card-title">{{noticia.TITLE}}</h5>
         <p class="card-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque scelerisque mi eget commodo maximus. Curabitur sed vestibulum libero. Donec lacinia imperdiet purus eget tempus. Donec ut porttitor arcu. Fusce imperdiet, magna quis lacinia semper, felis sapien sagittis risus, id malesuada mauris quam eu nisi. Cras tortor risus, dictum eu congue sed, convallis eu felis. Nullam ultricies efficitur euismod. Vestibulum vel lorem vel orci facilisis fermentum. Integer varius eget ligula ac lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-            </p>
+           {{noticia.LEAD_TEXT}} </p>
          
       </div>
     </div>
@@ -46,23 +45,30 @@ import { ref } from '@vue/reactivity';
 export default {
   setup() {
     const word = ref();
+    const noticias = ref();
     function search(){
       var data = new FormData();
       data.append("searchText", word.value);
       axios.post("http://archonnews.com/piaBDMBack/includes/search_inc.php?action=searchByLeadText", data).then((response) => {
         console.log(response)
+        noticias.value = response.data[0]
+        console.log(noticias.value)
       })
     }
 
     return {
       search,
       word,
+      noticias,
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
+.img-fluid{
+  max-height: 200px;
+}
 .cardSearchNews {
   width: 70%;
   max-width: 2000px;
