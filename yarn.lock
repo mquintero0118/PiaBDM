@@ -8627,6 +8627,11 @@
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.18"
 
+"vue-social-sharing@^4.0.0-alpha4":
+  "integrity" "sha512-hMbgpZkY5aRAiznSB/sgzdMVgdSbkmIHEaELX7pUbuUd6KS1Z/GAi7a/q0Qn+GFn0+6qMMvwyp3ZOE0+WYPQ1w=="
+  "resolved" "https://registry.npmjs.org/vue-social-sharing/-/vue-social-sharing-4.0.0-alpha4.tgz"
+  "version" "4.0.0-alpha4"
+
 "vue-style-loader@^4.1.0", "vue-style-loader@^4.1.2":
   "integrity" "sha512-sFuh0xfbtpRlKfm39ss/ikqs9AbKCoXZBpHeVZ8Tx650o0k0q/YCM7FRvigtxpACezfq6af+a7JeqVTWvncqDg=="
   "resolved" "https://registry.npmjs.org/vue-style-loader/-/vue-style-loader-4.1.3.tgz"

@@ -18,6 +18,7 @@
     "core-js": "^3.6.5",
     "vue": "^3.2.26",
     "vue-router": "^4.0.0-0",
+    "vue-social-sharing": "^4.0.0-alpha4",
     "vue-toastification": "^2.0.0-rc.5",
     "vue3-date-time-picker": "^2.7.0",
     "vuex": "^4.0.2"

@@ -19,7 +19,7 @@
                 {{noticia.LEAD_TEXT}}
               </p>
               <div class="d-flex justify-content-evenly">
-                <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button>
+                <!-- <button class="btn btn-primary" @click="check(noticia)">Ver noticia</button> -->
                 
                 <div class="btn-group" role="group" aria-label="Basic example" style="max-height: 60px !important">
                   <button
@@ -58,12 +58,28 @@ export default {
     function changeState(index, id) {
       estadoSelected.value = estados.value[index];
       if (index === 2){
-        let newsId = id
+        var dataNews = new FormData();
+        
+        let newsId = id;
+        dataNews.append("newsId",newsId);
         console.log(newsId)
-        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews", newsId).then((response) => {
+        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews", dataNews).then((response) => {
           console.log(response)
           this.getNews();
         })
+      }else if( index === 0){
+          var dataNews2 = new FormData();
+        
+        let newsId = id;
+        dataNews2.append("newsId",newsId);
+        console.log(newsId)
+        axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=ponerEnRedaccion", dataNews2).then((response) => {
+          console.log(response)
+          this.getNews();
+        })
+
+
+
       }
     }
     function getNews() {

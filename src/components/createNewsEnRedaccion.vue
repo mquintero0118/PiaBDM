@@ -202,7 +202,7 @@ export default {
     const section = ref();
     var sections = ref([]);
     const valueTags = ref();
-    const date = ref(new Date());
+    var date = ref(new Date());
     const store = useStore();
     var image_path = ref(
       "https://img.grouponcdn.com/deal/hjXrJTconxk9qQomkZfoW3/gn-2048x1242-2048x1229/v1/sc600x600.jpg"
@@ -272,7 +272,10 @@ export default {
 
     async function sendData(value) {
       var data = new FormData();
+      var newsId = props.query;
+      console.log(newsId.newsId);
         data.append("statusId", value);
+          data.append("newsId", newsId.newsId);
       data.append("title", document.getElementById("newsTitle").value);
       data.append("lead", document.getElementById("newsLead").value);
       data.append("text", document.getElementById("newsText").value);
@@ -318,7 +321,7 @@ export default {
           //http://localhost:8070/test.php?action=create
           // http://localhost:8070/piaBDMBack/api.php?action=create
           // "http://localhost:8070/piaBDMBack/piaBDMBack/includes/news_inc.php?action=create",
-          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=create",
+          "http://archonnews.com/piaBDMBack/includes/news_inc.php?action=update",
           data,
           {
             headers: {

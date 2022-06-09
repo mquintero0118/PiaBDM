@@ -95,7 +95,17 @@
             <i class="fas fa-heartbeat"></i> Like
           </button>
           <button type="button" class="btn btn-info" @click="share()">
-            <i class="fa fa-share"></i>  Compartir
+            <i class="fa fa-share"></i> 
+            <ShareNetwork
+
+    network="facebook"
+    v-bind:url="noticiaUrl"
+    title="Mira esta noticia en ArchonNews"
+
+    hashtags="ArchonNews"
+  >
+    Compartir
+</ShareNetwork>
           </button>
         </div>
       </div>
@@ -133,6 +143,10 @@
   </div>
 </template>
 
+
+
+
+
 <script>
 import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
@@ -142,6 +156,13 @@ const router = useRouter();
 export default {
   props: ["query"],
   setup(props) {
+
+
+    var noticiaUrl = "http://archonnews.com";
+
+
+
+
     const showVideo = ref(false);
     const noticia = ref("");
     const comments = ref("");
@@ -151,7 +172,7 @@ export default {
     const data = ref(false);
     let showModal = ref(false);
     function share(){
-      console.log('aqui haces lo del api we')
+     
     }
     function modal() {
       showModal.value = !showModal.value;
@@ -267,6 +288,7 @@ export default {
       commentText,
       store,
       share,
+      noticiaUrl,
     };
   },
 };
