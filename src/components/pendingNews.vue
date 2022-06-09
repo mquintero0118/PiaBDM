@@ -65,7 +65,10 @@ export default {
         console.log(newsId)
         axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=publicarNews", dataNews).then((response) => {
           console.log(response)
-          this.getNews();
+          setTimeout(() => {
+            this.getNews();
+          }, 2000)
+          
         })
       }else if( index === 0){
           var dataNews2 = new FormData();
@@ -75,7 +78,9 @@ export default {
         console.log(newsId)
         axios.post("http://archonnews.com/piaBDMBack/includes/news_inc.php?action=ponerEnRedaccion", dataNews2).then((response) => {
           console.log(response)
-          this.getNews();
+          setTimeout(() => {
+            this.getNews();
+          }, 2000)
         })
 
 
@@ -119,7 +124,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .cardSearchNews {
   width: 70%;
   max-width: 2000px;
@@ -138,5 +143,8 @@ export default {
 }
 .test {
   width: 100%;
+}
+.card-img-top {
+  max-height: 180px;
 }
 </style>

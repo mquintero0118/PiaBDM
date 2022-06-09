@@ -190,7 +190,7 @@ export default {
     
 </script>
 
-<style>
+<style scoped>
 .carousel {
   display: block;
   margin-left: auto;
@@ -212,5 +212,8 @@ export default {
 }
 .newNews {
   font-size: 60px;
+}
+.card-img-top {
+  max-height: 250px;
 }
 </style>
