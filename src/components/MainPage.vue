@@ -88,29 +88,6 @@
         </div>
         
       </li>
-      <li class="nav-item">
-        <hr>
-        <h1>Noticias mas vistas</h1>
-      </li>
-      <li class="nav-item">
-        
-<div class="d-flex justify-content-center">
-  <div class="d-flex flex-wrap">
-<div v-for="index in 3" :key="index" class="card cardSecond" style="width: 10rem">
-          <img src="./testImages/newspaper.png" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">El mejor portal de noticias</h5>
-            <p class="card-text">
-              Archon News fue premiado como el mejor portal para noticias en el mundo...
-            </p>
-           
-          </div>
-        </div>
-        </div>
-        </div>
-        
-        
-      </li>
     </ul>
   </ul>
 </template>
